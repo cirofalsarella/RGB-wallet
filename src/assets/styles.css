@@ -1,0 +1,33 @@
+/*   Fontes   */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+.txt {
+    font: 400 16px Roboto, sans-serif;
+}
+.subt {
+    font: 500 22px Roboto, sans-serif;
+}
+.title {
+    font: 700 32px Roboto, sans-serif;
+}
+
+/*   Cores   */
+.Cp {
+    color: #2854C7;
+}
+.Cs {
+    color: #F1D958
+}
+.Cf {
+    color: #F6F1D6
+}
+
+/*   Padrões   */
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+
+
