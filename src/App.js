@@ -1,17 +1,13 @@
 import React from 'react';
-import Admin from './pages/Admin'
+import Routes from './routes'
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-  } from "react-router-dom";
-import react from "react";
+import "./global.css";
 
 function App() {
   return (
-    <Admin />
+    <>
+      <Routes />
+    </>
   );
 }
 
