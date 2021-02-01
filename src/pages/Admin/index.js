@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import Menu from '../../Componentes/Menu.js'
+import '../../global.css';
 import './styles.css';
+
+import Menu from '../../Componentes/Menu.js'
 
 function Tabela(){
     const [UserList, SetUserlist] = useState([]);
@@ -16,44 +18,48 @@ function Tabela(){
     }, [UserList]);
 
     return (
-        <div>
-            <table className="Tabela-Admin">
-                <tr>
-                    <th>Nome</th>
-                    <th>Saldo</th>
-                    <th>Em Projeto</th>
-                    <th>Semanas Cumpridas</th>
-                    <th></th>
-                </tr>
+        <table className="tabela-usuarios">
+            <tr className="titulos">
+                <th>Nome</th>
+                <th>Saldo</th>
+                <th>Em Projeto</th>
+                <th>Semanas Cumpridas</th>
+                <th></th>
+            </tr>
 
-                {
-                    UserList.length > 0 &&
-                    UserList.Map (user => {
-                        return (
-                            <tr>
-                                <td>{user.nome}</td>
-                                <td>{user.saldo}</td>
-                                <td>{user.projeto ? "Sim" : "Não"}</td>
-                                <td>{user.Semanas}</td>
-                                <td><button></button></td>
-                            </tr>
-                        )
-                    })
+            {
+                UserList.length > 0 &&
+                UserList.Map (user => {
+                    return (
+                        <tr>
+                            <td>{user.nome}</td>
+                            <td>{user.saldo}</td>
+                            <td>{user.projeto ? "Sim" : "Não"}</td>
+                            <td>{user.Semanas}</td>
+                            <td><button></button></td>
+                        </tr>
+                    )
+                })
 
-                }
-            </table>
-        </div>
+            }
+        </table>
     )
 }
 
-
 export default function Admin() {
     return (
-        <div className="Adm-container">
+        <div className="main-container">
+    
             <Menu rota="Admin" mssg="Bem Vinde de Volta!"/>
-            <button>Logout</button>
-            <div>Seus Usuarios</div>
-            <Tabela />
+    
+            <div className="main-content">
+                <div className="logout-box">
+                    <button className="logout-btn">Logout</button>
+                </div>
+                <div className="page-name"> Seus Usuarios</div>
+                <Tabela />
+            </div>
+    
         </div>
     )
 }

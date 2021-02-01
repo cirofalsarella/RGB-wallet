@@ -1,12 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-/*   Padrões   */
+/*   Coisas Gerais da Página   */
 body {
     background: #F6F1D6;
     margin: 0px;
 }
-
 button {
     cursor: pointer;
 }
 
+
+/*   Formatações que se repetem   */
+.main-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.main-content {
+    width: 69%;
+}
+
+.logout-box {
+    margin: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+.logout-btn {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    color: black;
+    border: none;
+    border-radius: 15px;
+    background-color: #f1d958;    
+    padding: 5px 10px;
+}
+
+.page-name {
+    font-family: "Roboto", sans-serif;
+    font-size: 32px;
+    color: #2854c7;
+    margin: 30px;
+}
