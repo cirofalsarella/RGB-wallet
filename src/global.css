@@ -10,22 +10,35 @@ button {
 }
 
 
-/*   Formatações que se repetem   */
+/*   De todas as páginas   */
 .main-container {
     display: flex;
     flex-direction: row;
 }
-
 .main-content {
     width: 69%;
 }
+.page-name {
+    font-family: "Roboto", sans-serif;
+    font-size: 32px;
+    color: #2854c7;
+    margin: 30px;
+}
+.table-name {
+    font-family: "Roboto", sans-serif;
+    font-weight: 200;
+    font-size: 20px;
+    color: #2854c7;
+}
 
+
+/*   Logout   */
 .logout-box {
     margin: 30px;
     display: flex;
     justify-content: flex-end;
 }
-.logout-btn {
+.yellow-btn {
     font-family: "Roboto", sans-serif;
     font-weight: 300;
     font-size: 18px;
@@ -36,9 +49,16 @@ button {
     padding: 5px 10px;
 }
 
-.page-name {
+.text-box {
+    background-color: transparent;
+    width: 40%;
     font-family: "Roboto", sans-serif;
-    font-size: 32px;
-    color: #2854c7;
-    margin: 30px;
+    font-weight: 300;
+    font-size: 18px;
+    color: black;
+}
+.center-box {
+    display: flex;
+    justify-content: center;
+    margin: 40px;
 }
