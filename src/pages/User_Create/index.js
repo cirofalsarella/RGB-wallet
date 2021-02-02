@@ -18,33 +18,31 @@ export default function User_Create(props) {
                     <button className="yellow-btn"><FiCornerDownLeft/></button>
                 </div>
 
-                <div className="page-name">{"aa" + props.nickname}</div>
-
                 <div className="tabela-usuario">
                     <form>
                         <row>
                             <div className="table-name">UserName</div>
-                            <input className="text-box" placeholder={props.UserName} />
+                            <input className="text-box" placeholder="Ciro_Falsarella" />
                         </row>
                         <row>
                             <div className="table-name">Nome</div>
-                            <input className="text-box" placeholder={props.Nome} />
+                            <input className="text-box" placeholder="Ciro Grossi Falsarella" />
                         </row>
                         <row>
                             <div className="table-name">Saldo</div>
-                            <input className="text-box" placeholder={props.Saldo} />
+                            <input className="text-box" placeholder="0.000" />
                         </row>
                         <row>
                             <div className="table-name">Vendeu Projeto</div>
-                            <input className="text-box" placeholder={props.Vendeu} />
+                            <input className="text-box" placeholder="false" />
                         </row>
                         <row>
                             <div className="table-name">Semanas com 10 horas</div>
-                            <input className="text-box" placeholder={props.semanas} />
+                            <input className="text-box" placeholder="1" />
                         </row>
                         <row>
                             <div className="table-name">Trabalhando em um Projeto</div>
-                            <input className="text-box" placeholder={props.projeto} />
+                            <input className="text-box" placeholder="true" />
                         </row>
                     </form>
                 </div>

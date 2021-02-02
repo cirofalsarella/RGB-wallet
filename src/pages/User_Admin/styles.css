@@ -1,3 +1,20 @@
-.User-Adm-Container {
-    height: 100vh;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+.tabela {
+    height: 70%;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-family: "Roboto", sans-serif;
+    font-size: 24px;
+    color: #2854c7;
+}
+.item {
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    font-weight: lighter;
+    color: black;
 }

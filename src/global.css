@@ -8,6 +8,13 @@ body {
 button {
     cursor: pointer;
 }
+row {
+    margin: 20px;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
 
 /*   De todas as páginas   */
@@ -17,6 +24,11 @@ button {
 }
 .main-content {
     width: 69%;
+    height: 100%;
+    display: flex;
+  	flex-direction: column;
+    content: space-between;
+
 }
 .page-name {
     font-family: "Roboto", sans-serif;
@@ -47,6 +59,11 @@ button {
     border-radius: 15px;
     background-color: #f1d958;    
     padding: 5px 10px;
+    transition: 0,3s;
+}
+.yellow-btn:hover  {
+    font-size: 20px;
+    background-color: rgba(250, 219, 44, 0.8)
 }
 
 .text-box {
