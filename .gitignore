@@ -2,24 +2,24 @@
 
 
 # dependencies
-node_modules
-.pnp
-.pnp.js
+Front/node_modules
+Front/.pnp
+Front/.pnp.js
 
 # testing
-/coverage
+/Front/coverage
 
 # production
-/build
+/Front/build
 
 # misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+Front/.DS_Store
+Front/.env.local
+Front/.env.development.local
+Front/.env.test.local
+Front/.env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.eslintcache
+Front/npm-debug.log*
+Front/yarn-debug.log*
+Front/yarn-error.log*
+Front/.eslintcache
