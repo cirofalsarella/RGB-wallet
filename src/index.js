@@ -1,15 +1,19 @@
+
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+
+/*
 import express from 'express';
 import bodyParser from 'body-parser';
+
 
 const server = express();
 server.use(budyParser.urlencoded({extended: true}));
 server.use(bodyParser.json())
 
 let users = [];                     //lista de usuarios
-
 //************  C.R.U.D ************
 
 //Funcao que retorna todos os usuarios
