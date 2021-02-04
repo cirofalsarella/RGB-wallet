@@ -6,11 +6,17 @@ Front/node_modules
 Front/.pnp
 Front/.pnp.js
 
+Back/node_modules
+Back/.pnp
+Back/.pnp.js
+
 # testing
 /Front/coverage
+/Back/coverage
 
 # production
 /Front/build
+/Back/build
 
 # misc
 Front/.DS_Store
@@ -19,7 +25,18 @@ Front/.env.development.local
 Front/.env.test.local
 Front/.env.production.local
 
+Back/.DS_Store
+Back/.env.local
+Back/.env.development.local
+Back/.env.test.local
+Back/.env.production.local
+
 Front/npm-debug.log*
 Front/yarn-debug.log*
 Front/yarn-error.log*
 Front/.eslintcache
+
+Back/npm-debug.log*
+Back/yarn-debug.log*
+Back/yarn-error.log*
+Back/.eslintcache
