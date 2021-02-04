@@ -79,6 +79,38 @@ server.delete("/Users/:user_name", (req,res) => {
   return res.status(200).send(users);     //retorna a lista atualizada
 })
 
+//****************** Botões *****************
+
+//funcao que atualiza o saldo de todos
+server.put("/Admin/Saldo", (req,res) => {
+  let new_users = [];                               //nova lista com o usuario atualizado
+
+  users.forEach(user => {                           //loop que adiciona os usuarios na nova lista
+    user.sum += (40 +(5 * user.weeks_10h) * (1 + (user.sold && 0.2) + (user.working && 0.1)));
+    new_users.push(user);                           //adiciona o atualizado
+  })
+
+  users = new_users;                            //atualiza a lista
+
+  return res.status(200).send(users);    //retorna o usuario atualizado
+
+})
+
+//funcao de zerar o saldo de todos os usuarios
+server.put("/Admin/Zera", (req,res) => {
+  let new_users = [];                               //nova lista com o usuario atualizado
+
+  users.forEach(user => {                           //loop que adiciona os usuarios na nova lista
+    user.sum = 0;
+    new_users.push(user);                           //adiciona o atualizado
+  })
+
+  users = new_users;                            //atualiza a lista
+
+  return res.status(200).send(users);    //retorna o usuario atualizado
+
+})
+
 /*
 *Ainda falta fazer a atualização do saldo
 *atualização do sistema com o mes passa, setando as weeks_10h para zero
