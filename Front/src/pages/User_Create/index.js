@@ -15,7 +15,9 @@ export default function User_Create(props) {
             <div className="main-content" >
 
                 <div className="logout-box">
-                    <button className="yellow-btn"><FiCornerDownLeft/></button>
+                    <Link to="../Admin">
+                        <button className="yellow-btn"><FiCornerDownLeft/></button>
+                    </Link> 
                 </div>
 
                 <div className="tabela-usuario">

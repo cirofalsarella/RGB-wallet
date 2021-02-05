@@ -54,7 +54,9 @@ export default function Admin() {
     
             <div className="main-content">
                 <div className="logout-box">
-                    <button className="yellow-btn">Logout</button>
+                    <Link to="../Login">
+                        <button className="yellow-btn">Logout</button>
+                    </Link>
                 </div>
                 <div className="page-name"> Seus Usuarios</div>
                 <Tabela />
