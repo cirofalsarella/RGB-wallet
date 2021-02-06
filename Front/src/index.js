@@ -7,3 +7,8 @@ ReactDOM.render(
   <App />,
   document.getElementById('root')
 );
+
+
+server.listen(3000, function(){
+  console.log("rodando");
+});

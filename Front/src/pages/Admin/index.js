@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import '../../global.css';
 import './styles.css';
 
+import api from '../../services/api'
 import Menu from '../../Componentes/Menu.js'
 
-function Tabela(){
+function Tabela(){ 
     const [UserList, SetUserlist] = useState([]);
 
     const fetchData = async () => {
