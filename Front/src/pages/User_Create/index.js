@@ -9,24 +9,40 @@ import Menu from '../../Componentes/Menu.js'
 
 import { FiCornerDownLeft } from 'react-icons/fi'
 
-export async function User_Create(props) {
+export default function User_Create(props) {
+    
+    async function Search(test){
+        return await api.get('Users/' + test);        
+    }
 
-    const user = await api.get('User/:user_name', "jun")
+    const user = Search("jun"); //receber a variavel de userName **************************
+    const old_user_name = user.user_name;
 
-    const [user_name, setUserName] = useState(''); // useState({user.user_name})
+    let novo;
+    if(user == null) novo = true;
+    else novo = false;
+
+    const [user_name, setUserName] = useState(user.user_name); // useState({user.user_name})
     const [name, setName] = useState('');
-    const [sold, setSold] = useState('');
-    const [working, setWorking] = useState('');
+    const [sold, setSold] = useState(false);
+    const [working, setWorking] = useState(false);
     const [weeks_10h, setWeeks] = useState('');
 
     async function handleCreate(e){
         e.preventDefault();
-        user = {
+        const user = {
             user_name, name, sold, working, weeks_10h
         }
         try {
-            const response = await api.post("Users", user);
-            alert('Usuario criado com sucesso');
+            if(novo){
+                await api.post("Users", user);
+                alert('Usuario criado com sucesso');
+            }else{
+                await api.put("Users/" + user.user_name, user);//************************** *************/
+                alert('Usuario editado com sucesso');
+            }
+           
+           
         } catch(e) {
             alert('ERRO ao criar usuario');
         }
@@ -54,14 +70,12 @@ export async function User_Create(props) {
                             <div className="table-name">UserName</div>
                             <input
                               className="text-box"
-                              placeholder="Ciro_Falsarella"
                               value={ user_name }
                               onChange={ e => setUserName(e.target.value)} />
                         </row>
                         <row>
                             <div className="table-name">Nome</div>
-                            <input className="text-box"
-                            placeholder="Ciro Grossi Falsarella"
+                            <input className="text-box"                            
                             value={ name }
                             onChange={ e => setName(e.target.value) } />
                         </row>
@@ -69,7 +83,6 @@ export async function User_Create(props) {
                             <div className="table-name">Vendeu Projeto</div>
                             <input
                               type="checkbox"
-                              placeholder="false"
                               value={ sold }
                               onChange={ e => setSold(e.target.value) }
                                />
@@ -78,7 +91,6 @@ export async function User_Create(props) {
                             <div className="table-name">Semanas com 10 horas</div>
                             <input 
                               className="text-box" 
-                              placeholder="1"
                               value={ weeks_10h }
                               onChange={ e => setWeeks(e.target.value) } />
                         </row>
@@ -86,7 +98,6 @@ export async function User_Create(props) {
                             <div className="table-name">Trabalhando em um Projeto</div>
                             <input 
                               type="checkbox"
-                              placeholder="true" 
                               value={ working } 
                               onChange={ e => setWorking(e.target.value) }/>
                         </row>

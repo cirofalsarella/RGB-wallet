@@ -24,13 +24,16 @@ server.use(bodyParser.json())
 
 //Funcao que retorna todos os usuarios
 server.get("/Users", async (req,res) => {
-  const users2 = await connection('users').select('*')
-  return res.status(200).send(users2);   //retorna toda a lista de usuario do DB
+  console.log("entrei");
+  const users = await connection('users').select('*');
+
+  return res.status(200).send(users);   //retorna toda a lista de usuario do DB
 })
 
 //Funcao que retorna um usuario
 server.get("/Users/:user_name", async (req,res) => {
   try {
+    console.log("Ops");
     const user_name = req.params.user_name;       //pega o username para fazer a busca
     const user_db = await connection('users').where('user_name', user_name);  //busca no DB
 

@@ -7,17 +7,7 @@ import './styles.css';
 import api from '../../services/api'
 import Menu from '../../Componentes/Menu.js'
 
-function Tabela(){ 
-    const [UserList, SetUserlist] = useState([]);
-
-    const fetchData = async () => {
-        // retorna lista de usuarios
-    }
-
-    useEffect(() => {
-
-    }, [UserList]);
-
+function Tabela(userList){
     return (
         <table className="tabela-usuarios">
             <tr className="titulos">
@@ -29,14 +19,14 @@ function Tabela(){
             </tr>
 
             {
-                UserList.length > 0 &&
-                UserList.Map (user => {
+                userList.length > 0 &&
+                userList.Map (user => {
                     return (
                         <tr>
-                            <td>{user.nome}</td>
-                            <td>{user.saldo}</td>
-                            <td>{user.projeto ? "Sim" : "Não"}</td>
-                            <td>{user.Semanas}</td>
+                            <td>{user.name}</td>
+                            <td>{user.sum}</td>
+                            <td>{user.working ? "Sim" : "Não"}</td>
+                            <td>{user.weeks_10h}</td>
                             <td><button></button></td>
                         </tr>
                     )
@@ -48,6 +38,16 @@ function Tabela(){
 }
 
 export default function Admin() {
+
+    async function todos(){
+        console.log("entrei no getALL");
+        return await api.get('Users/');
+    }
+    
+    let userList = todos();
+    console.log(userList);
+
+
     return (
         <div className="main-container">
     
@@ -60,7 +60,7 @@ export default function Admin() {
                     </Link>
                 </div>
                 <div className="page-name"> Seus Usuarios</div>
-                <Tabela />
+                <Tabela userList={userList} />
             </div>
     
         </div>

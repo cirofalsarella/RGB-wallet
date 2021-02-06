@@ -6,7 +6,17 @@ import './styles.css';
 
 import { FiCornerDownLeft } from 'react-icons/fi'
 
+import api from '../../services/api';
+
 export default function User_Admin(props) {
+    
+    async function Search(test){
+        return await api.get('Users/' + test);        
+    }
+
+    const user = Search("jun");
+
+
     return (
         <div className="main-container" >
             <Menu mssg="Perfil do Usuário" rota="User_Admin"/>

@@ -7,7 +7,16 @@ import DesenhoRGB from '../../assets/RGB_desenho.png'
 import '../../global.css';
 import './styles.css';
 
+import api from '../../services/api';
+
 export default function User() {
+
+    async function Search(test){
+        return await api.get('Users/' + test);        
+    }
+
+    const user = Search("jun");
+
     return (
         <>
             <div className="main-container">

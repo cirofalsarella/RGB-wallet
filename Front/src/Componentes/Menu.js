@@ -78,3 +78,16 @@ function Menu(props){
 }
 
 export default Menu;
+/*
+    async function zerarSaldos(){
+        await api.put('Admin/zerar');
+    }
+
+     async function alterarSaldos(){
+        await api.put('Admin/Saldo');
+    }
+
+    async function deletarUsuario(string user_name){
+        await api.delete('Users/'+ user_name);
+    }
+*/
