@@ -16,7 +16,7 @@ export default function User_Create(props) {
     const [working, setWorking] = useState('');
     const [weeks_10h, setWeeks] = useState('');
 
-    async function handleCreate(){
+    async function handleCreate(e){
         e.preventDefault();
         const user = {
             user_name, name, sold, working, weeks_10h
@@ -46,7 +46,7 @@ export default function User_Create(props) {
                             <input
                               className="text-box"
                               placeholder="Ciro_Falsarella"
-                              value={ user-name }
+                              value={ user_name }
                               onChange={ e => setUserName(e.target.value)} />
                         </row>
                         <row>

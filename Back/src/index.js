@@ -26,21 +26,27 @@ server.get("/Users/:user_name", async (req,res) => {
 
 //Funcao que adiciona um usuario
 server.post("/Users", async (req,res) => {
-  const {user_name, name, sold, working, weeks_10h} = req.body;       //salva o username,nome,se vendeu este mes,se esta em um projeto,e quantas semanas trabalhou
-  const sum = 0;                                                      //saldo zerado
-
-  const user = {user_name, name, sold, working, weeks_10h, sum}       //cria o usuario com os dados coletados
+  try{
+    const {user_name, name, sold, working, weeks_10h} = req.body;       //salva o username,nome,se vendeu este mes,se esta em um projeto,e quantas semanas trabalhou
+    const sum = 0;                                                      //saldo zerado
   
-  await connection('users').insert({
-    user_name,
-    name,
-    sold,
-    working,
-    weeks_10h,
-    sum,
-  })                                                   //insere no DB
+    const user = {user_name, name, sold, working, weeks_10h, sum}       //cria o usuario com os dados coletados
+    
+    await connection('users').insert({
+      user_name,
+      name,
+      sold,
+      working,
+      weeks_10h,
+      sum,
+    })                                                   //insere no DB
+  
+    return res.status(202).send("Usuario criado com sucesso");                                  //retorna o usuario adicionado
 
-  return res.status(202).send(user);                                  //retorna o usuario adicionado
+  }catch(error){
+      return res.send("UserName já existe");
+  }
+ 
 })
 
 //Funcao que atualiza um usuario
@@ -50,7 +56,7 @@ server.put("/Users/:user_name", async (req,res) => {
   const {user_name, name, sold, working, weeks_10h, sum} = req.body;      //info do usuario atualizado
   const user_db = {user_name, name, sold, working, weeks_10h, sum};
 
-  await connection('users').where('user_name', user_name).update({user_name, name, sold, working, weeks_10h, sum}); //atualiza no DB
+  await connection('users').where('user_name', user_name2).update({user_name, name, sold, working, weeks_10h, sum}); //atualiza no DB
  
   return res.status(200).send(user_db);    //retorna o usuario atualizado
 
@@ -96,6 +102,6 @@ server.put("/Admin/Zera", async (req,res) => {
 *atualização do sistema com o mes passa, setando as weeks_10h para zero
 */
 
-server.listen(3000,function(){
+server.listen(3001,function(){
   console.log("rodando");
 });
