@@ -9,6 +9,16 @@ server.use(cors({}));
 server.use(bodyParser.urlencoded({extended: true}));
 server.use(bodyParser.json())
 
+/*
+  GET:    '/Users' -> retorna todos os usuários
+  GET:    '/Users/:user_name' -> retorna o usuario com esse user_name
+  POST:   '/Users' -> adiciona um usuário
+  PUT:    '/Users' -> atualiza um usuário
+  DELETE: '/Users:user_name' -> deleta um usuário
+  PUT:    '/Admin/Saldo' -> faz a soma dos saldos
+  PUT:    '/Admin/Zera' -> zera os saldos
+*/
+
 
 //************  C.R.U.D ************
 
@@ -20,19 +30,22 @@ server.get("/Users", async (req,res) => {
 
 //Funcao que retorna um usuario
 server.get("/Users/:user_name", async (req,res) => {
-  const user_name = req.params.user_name;       //pega o username para fazer a busca
-  const user_db = await connection('users').where('user_name', user_name);  //busca no DB
+  try {
+    const user_name = req.params.user_name;       //pega o username para fazer a busca
+    const user_db = await connection('users').where('user_name', user_name);  //busca no DB
+
+    return res.status(200).send(user_db); //retorna o usuario
+  } catch (err) {
+    return null;
+  }
   
-  return res.status(200).send(user_db); //retorna o usuario
 })
 
 //Funcao que adiciona um usuario
 server.post("/Users", async (req,res) => {
   try{
-    console.log("entrei");
     const {user_name, name, sold, working, weeks_10h} = req.body;       //salva o username,nome,se vendeu este mes,se esta em um projeto,e quantas semanas trabalhou
     const sum = 0;                                                      //saldo zerado
-    console.log("peguei o usuario");
     const user = {user_name, name, sold, working, weeks_10h, sum}       //cria o usuario com os dados coletados
     
     await connection('users').insert({
@@ -47,7 +60,6 @@ server.post("/Users", async (req,res) => {
     return res.status(202).send(user);                                  //retorna o usuario adicionado
 
   }catch(error){
-      console.log("to no catch");
       return res.send("UserName já existe");
   }
  

@@ -9,8 +9,11 @@ import Menu from '../../Componentes/Menu.js'
 
 import { FiCornerDownLeft } from 'react-icons/fi'
 
-export default function User_Create(props) {
-    const [user_name, setUserName] = useState('');
+export async function User_Create(props) {
+
+    const user = await api.get('User/:user_name', "jun")
+
+    const [user_name, setUserName] = useState(''); // useState({user.user_name})
     const [name, setName] = useState('');
     const [sold, setSold] = useState('');
     const [working, setWorking] = useState('');
@@ -18,15 +21,13 @@ export default function User_Create(props) {
 
     async function handleCreate(e){
         e.preventDefault();
-        const user = {
+        user = {
             user_name, name, sold, working, weeks_10h
         }
-        console.log({user});
-        try{
-            console.log("entri no try de handleCreate");
+        try {
             const response = await api.post("Users", user);
             alert('Usuario criado com sucesso');
-        }catch(e){
+        } catch(e) {
             alert('ERRO ao criar usuario');
         }
         
