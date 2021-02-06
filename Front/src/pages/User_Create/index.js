@@ -59,7 +59,7 @@ export default function User_Create(props) {
                         <row>
                             <div className="table-name">Vendeu Projeto</div>
                             <input
-                              className="text-box"
+                              type="checkbox"
                               placeholder="false"
                               value={ sold }
                               onChange={ e => setSold(e.target.value) }
@@ -76,7 +76,7 @@ export default function User_Create(props) {
                         <row>
                             <div className="table-name">Trabalhando em um Projeto</div>
                             <input 
-                              className="text-box" 
+                              type="checkbox"
                               placeholder="true" 
                               value={ working } 
                               onChange={ e => setWorking(e.target.value) }/>
