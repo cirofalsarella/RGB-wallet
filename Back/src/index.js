@@ -1,9 +1,11 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+const cors = require('cors');
 const connection = require('./database/connection');
 
 const server = express();
 
+server.use(cors({}));
 server.use(bodyParser.urlencoded({extended: true}));
 server.use(bodyParser.json())
 
@@ -27,9 +29,10 @@ server.get("/Users/:user_name", async (req,res) => {
 //Funcao que adiciona um usuario
 server.post("/Users", async (req,res) => {
   try{
+    console.log("entrei");
     const {user_name, name, sold, working, weeks_10h} = req.body;       //salva o username,nome,se vendeu este mes,se esta em um projeto,e quantas semanas trabalhou
     const sum = 0;                                                      //saldo zerado
-  
+    console.log("peguei o usuario");
     const user = {user_name, name, sold, working, weeks_10h, sum}       //cria o usuario com os dados coletados
     
     await connection('users').insert({
@@ -41,9 +44,10 @@ server.post("/Users", async (req,res) => {
       sum,
     })                                                   //insere no DB
   
-    return res.status(202).send("Usuario criado com sucesso");                                  //retorna o usuario adicionado
+    return res.status(202).send(user);                                  //retorna o usuario adicionado
 
   }catch(error){
+      console.log("to no catch");
       return res.send("UserName já existe");
   }
  

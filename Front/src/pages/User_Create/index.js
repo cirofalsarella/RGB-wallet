@@ -21,8 +21,16 @@ export default function User_Create(props) {
         const user = {
             user_name, name, sold, working, weeks_10h
         }
+        console.log({user});
+        try{
+            console.log("entri no try de handleCreate");
+            const response = await api.post("Users", user);
+            alert('Usuario criado com sucesso');
+        }catch(e){
+            alert('ERRO ao criar usuario');
+        }
+        
 
-        const response = await api.post('/Users', user);
     }
 
 
@@ -81,12 +89,13 @@ export default function User_Create(props) {
                               value={ working } 
                               onChange={ e => setWorking(e.target.value) }/>
                         </row>
+                        <div className="center-box">
+                            <button type="submit" className="submit-btn">Salvar Usuário</button>
+                        </div>
                     </form>
                 </div>
                 
-                <div className="center-box">
-                    <button type="submit" className="submit-btn">Salvar Usuário</button>
-                </div>
+              
 
             </div>
 
