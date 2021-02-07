@@ -1,22 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Menu from '../../Componentes/Menu.js'
-import DesenhoRGB from '../../assets/RGB_desenho.png'
+import api from '../../services/api';
 
+import Menu from '../../Componentes/Menu.js'
+
+import DesenhoRGB from '../../assets/RGB_desenho.png'
 
 import '../../global.css';
 import './styles.css';
 
-import api from '../../services/api';
 
 export default function User() {
 
-    async function Search(test){
-        return await api.get('Users/' + test);        
+    async function GetByUsername(user_name){
+        return await api.get('Users/' + user_name);        
     }
+    const user = GetByUsername("jun");
 
-    const user = Search("jun");
-
+    
     return (
         <>
             <div className="main-container">
@@ -33,11 +34,11 @@ export default function User() {
                     <div className="tabela">
                         <row>
                             <div className="label">Nome</div>
-                            <div className="item">Ciro Grossi Falsarella</div>
+                            <div className="item">{ user.user_name }</div>
                         </row>
                         <row>
                             <div className="label">Saldo</div>
-                            <div className="item">R$ 0,00</div>
+                            <div className="item">R$ { user.sum }</div>
                         </row>
                     </div>
 
