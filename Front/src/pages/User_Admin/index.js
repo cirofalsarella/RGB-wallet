@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import Menu from '../../Componentes/Menu.js'
@@ -9,18 +9,23 @@ import { FiCornerDownLeft } from 'react-icons/fi'
 import api from '../../services/api';
 
 export default function User_Admin(props) {
-    
-    async function Search(test){
-        return await api.get('Users/' + test);        
+    const [user, setUser] = useState ();
+
+    const fetchData = async (id) => {
+        console.log(id)
+        const response = await api.get('/Users/' + id);
+        setUser(response.data);
     }
 
-    const user = Search("jun");
+    useEffect (() => {
+        fetchData(props.id);
+        console.log(user)
+    }, []);
 
 
     return (
-        <div className="main-container" >
-            <Menu mssg="Perfil do Usuário" rota="User_Admin"/>
-
+        <div className="main-container" >                   
+            <Menu mssg="Perfil do Usuário" rota="User_Admin" id={props.id}/>
 
             <div className="main-content">
                 
@@ -30,7 +35,7 @@ export default function User_Admin(props) {
                     </Link>
                 </div>
 
-                <div className="page-name">Ciro_Falsarella</div>
+                <div className="page-name"></div>
 
                 <div className="tabela">
                     <row>

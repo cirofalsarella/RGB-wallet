@@ -7,7 +7,23 @@ import './styles.css';
 import api from '../../services/api'
 import Menu from '../../Componentes/Menu.js'
 
-function Tabela(userList){
+function Tabela(){
+    const [userList, setUserList] = useState ([]);
+
+    const fetchData = async () => {
+        try {
+            const response = await api.get('/Users');
+            setUserList(response.data);
+        } catch (e) {
+            alert(e);            
+        }
+    }
+
+    useEffect (() => {
+        fetchData();
+    }, [userList]);
+
+
     return (
         <table className="tabela-usuarios">
             <tr className="titulos">
@@ -20,14 +36,18 @@ function Tabela(userList){
 
             {
                 userList.length > 0 &&
-                userList.Map (user => {
+                userList.map(user => {
                     return (
                         <tr>
-                            <td>{user.name}</td>
+                            <td>{user.user_name}</td>
                             <td>{user.sum}</td>
                             <td>{user.working ? "Sim" : "Não"}</td>
                             <td>{user.weeks_10h}</td>
-                            <td><button></button></td>
+                            <td>
+                                <Link to="../User_Admin" id={user.user_name}>
+                                    <button/>
+                                </Link>
+                            </td>
                         </tr>
                     )
                 })
@@ -38,16 +58,6 @@ function Tabela(userList){
 }
 
 export default function Admin() {
-
-    async function todos(){
-        console.log("entrei no getALL");
-        return await api.get('Users/');
-    }
-    
-    let userList = todos();
-    console.log(userList);
-
-
     return (
         <div className="main-container">
     
@@ -59,8 +69,9 @@ export default function Admin() {
                         <button className="yellow-btn">Logout</button>
                     </Link>
                 </div>
+
                 <div className="page-name"> Seus Usuarios</div>
-                <Tabela userList={userList} />
+                <Tabela />
             </div>
     
         </div>

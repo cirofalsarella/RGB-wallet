@@ -1,28 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link }  from 'react-router-dom';
-import api from '../../services/api'
+import api from '../../services/api';
 
-import Menu from '../../Componentes/Menu.js'
+import Menu from '../../Componentes/Menu.js';
 
-import { FiCornerDownLeft } from 'react-icons/fi'
+import { FiCornerDownLeft } from 'react-icons/fi';
 
 import './styles.css';
-import '../../global.css'
+import '../../global.css';
 
 
 export default function User_Create(props) {
-    
-    async function GetByUsername(user_name){
-        return await api.get('Users/' + user_name);        
+    const [user, setUser] = useState ();
+
+    const fetchData = async () => {
+        const response = await api.get('/Users/' + 'jun');
+        setUser(response.data);
     }
 
-    // const user = Search(props.userName);
-    const user = GetByUsername("jun");
-    const old_user_name = user.user_name;
+    useEffect (() => {
+        fetchData();
+    }, []);
 
-    const novo = false;
-    if (user) novo = true;
+    //let old_user_name = user.user_name;
 
+    let novo = false;
+    if (user === undefined) novo = true;
+
+    console.log(user);
     const [user_name, setUserName] = useState(user.user_name);
     const [name, setName] = useState(user.name);
     const [sold, setSold] = useState(user.sold);
@@ -71,20 +76,20 @@ export default function User_Create(props) {
                             <div className="table-name">UserName</div>
                             <input
                               className="text-box"
-                              value={{ user_name }}
+                              value={ user_name }
                               onChange={ e => setUserName(e.target.value) } />
                         </row>
                         <row>
                             <div className="table-name">Nome</div>
                             <input className="text-box"                            
-                            value={{ name }}
+                            value={ name }
                             onChange={ e => setName(e.target.value) } />
                         </row>
                         <row>
                             <div className="table-name">Vendeu Projeto</div>
                             <input
                               type="checkbox"
-                              value={{ sold }}
+                              value={ sold }
                               onChange={ e => setSold(e.target.value) }
                                />
                         </row>
@@ -92,14 +97,14 @@ export default function User_Create(props) {
                             <div className="table-name">Semanas com 10 horas</div>
                             <input 
                               className="text-box" 
-                              value={{ weeks_10h }}
+                              value={ weeks_10h }
                               onChange={ e => setWeeks(e.target.value) } />
                         </row>
                         <row>
                             <div className="table-name">Trabalhando em um Projeto</div>
                             <input 
                               type="checkbox"
-                              value={{ working }}
+                              value={ working }
                               onChange={ e => setWorking(e.target.value) }/>
                         </row>
                         <div className="center-box">

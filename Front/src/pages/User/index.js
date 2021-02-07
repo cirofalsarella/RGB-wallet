@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 
-import Menu from '../../Componentes/Menu.js'
+import Menu from '../../Componentes/Menu.js';
 
-import DesenhoRGB from '../../assets/RGB_desenho.png'
+import DesenhoRGB from '../../assets/RGB_desenho.png';
 
 import '../../global.css';
 import './styles.css';
@@ -12,10 +12,20 @@ import './styles.css';
 
 export default function User() {
 
-    async function GetByUsername(user_name){
-        return await api.get('Users/' + user_name);        
+    const [user, setUser] = useState ([]);
+
+    const fetchData = async () => {
+        try {
+            const response = await api.get('/Users/' + "jun");
+            setUser(response.data);
+        } catch (e) {
+            alert(e);            
+        }
     }
-    const user = GetByUsername("jun");
+
+    useEffect (() => {
+        fetchData();
+    }, []);
 
     
     return (
@@ -34,11 +44,11 @@ export default function User() {
                     <div className="tabela">
                         <row>
                             <div className="label">Nome</div>
-                            <div className="item">{ user.user_name }</div>
+                            <div className="item">{ user.user_name }</div> 
                         </row>
                         <row>
                             <div className="label">Saldo</div>
-                            <div className="item">R$ { user.sum }</div>
+                            <div className="item">R$ { user.sum } </div>
                         </row>
                     </div>
 
