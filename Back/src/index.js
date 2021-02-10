@@ -1,7 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+
 const cors = require('cors');
 const connection = require('./database/connection');
+
+const bcrypt = require ("bcryptjs");
+const jwt = require("jsonwebtoken");
+const SECRET = "ICMCJR";
 
 const server = express();
 
@@ -24,7 +29,6 @@ server.use(bodyParser.json())
 
 //Funcao que retorna todos os usuarios
 server.get("/Users", async (req,res) => {
-  //console.log("entrei");
   const users = await connection('users').select('*');
 
   return res.status(200).send(users);   //retorna toda a lista de usuario do DB
@@ -91,7 +95,10 @@ server.delete("/Users/:user_name", async (req,res) => {
   return res.status(204).send();     //retorna a lista atualizada
 })
 
-//****************** Botões *****************
+
+
+
+//****************** Botões ******************
 
 //funcao que atualiza o saldo de todos
 server.put("/Admin/Saldo", async (req,res) => {
@@ -119,9 +126,80 @@ server.put("/Admin/Zera", async (req,res) => {
 
 })
 
-/*
-*atualização do sistema com o mes passa, setando as weeks_10h para zero
-*/
+
+
+
+
+//****************** Login *******************
+
+//funcao que adiciona um admin
+server.post("/Admin/add",(request, response, next) => {
+  bcrypt.hash(request.body.password, 10)
+  .then(hashedPassword => {
+     return connection('admin').insert({
+        username: request.body.username,
+        password: hashedPassword
+     })
+     .then(users => {
+        response.json(users[0])
+     })
+     .catch(error => next(error))
+  })
+})
+
+//funcao que retorna todos os admin
+server.get("/Admin/all",(request, response, next) => {
+  connection('admin')
+  .then(users => {
+     response.json(users)
+  })
+})
+
+//funcao que faz o login
+server.post("/login", async(request, response, next) => {
+  await connection('admin')
+  .where({username: request.body.username})
+  .first()
+  .then(user => {
+     if(!user){
+        response.status(401).json({
+           error: "No user by that name"
+        })
+     }else{
+        return bcrypt
+        .compare(request.body.password, user.password)
+        .then(isAuthenticated => {
+           if(!isAuthenticated){
+              response.status(401).json({
+                 error: "Unauthorized Access!"
+              })
+           }else{
+              return jwt.sign(user, SECRET, (error, token) => {
+                 response.status(200).json({token})
+              })
+           }
+        })
+     }
+  })
+})
+
+//verificacao do token
+server.get("/verify", (request, response, next) => {
+  const token = request.headers.authorization.split(" ")[0]
+  console.log(token);
+  jwt.verify(token, SECRET, (error, decodedToken) => {
+     if(error){
+        response.status(401).json({
+           message: "Unauthorized Access!"
+        })
+     }else{
+        response.status(200).json({
+           id: decodedToken.id,
+           username: decodedToken.username
+        })
+     }
+  })
+})
 
 server.listen(3001,function(){
   console.log("rodando");
