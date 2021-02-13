@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import Auth from '../../services/AuthService.js'
 
 import '../../global.css';
 import './styles.css';
@@ -18,11 +19,9 @@ function Tabela(){
             alert(e);            
         }
     }
-
     useEffect (() => {
         fetchData();
-    }, [userList]);
-
+    }, []);
 
     return (
         <table className="tabela-usuarios">
@@ -58,6 +57,12 @@ function Tabela(){
 }
 
 export default function Admin() {
+
+    const logout = () => {
+        Auth.logOut();
+    }
+
+
     return (
         <div className="main-container">
     
@@ -65,8 +70,8 @@ export default function Admin() {
     
             <div className="main-content">
                 <div className="logout-box">
-                    <Link to="../Login">
-                        <button className="yellow-btn">Logout</button>
+                    <Link to="../">
+                        <button className="yellow-btn" onClick={ logout } >Logout</button>
                     </Link>
                 </div>
 

@@ -133,7 +133,7 @@ server.put("/Admin/Zera", async (req,res) => {
 //****************** Login *******************
 
 //funcao que adiciona um admin
-server.post("/Admin/add",(request, response, next) => {
+server.post("/login/add",(request, response, next) => {
   bcrypt.hash(request.body.password, 10)
   .then(hashedPassword => {
      return connection('admin').insert({
@@ -142,13 +142,13 @@ server.post("/Admin/add",(request, response, next) => {
      })
      .then(users => {
         response.json(users[0])
-     })
+     }) 
      .catch(error => next(error))
   })
 })
 
 //funcao que retorna todos os admin
-server.get("/Admin/all",(request, response, next) => {
+server.get("/login/all",(request, response, next) => {
   connection('admin')
   .then(users => {
      response.json(users)
@@ -184,9 +184,9 @@ server.post("/login", async(request, response, next) => {
 })
 
 //verificacao do token
-server.get("/verify", (request, response, next) => {
+server.get("/login/verify", (request, response, next) => {
   const token = request.headers.authorization.split(" ")[0]
-  console.log(token);
+  //console.log(token);
   jwt.verify(token, SECRET, (error, decodedToken) => {
      if(error){
         response.status(401).json({

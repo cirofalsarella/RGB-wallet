@@ -14,7 +14,7 @@ const balancesReset = async function(){
     await api.put('Admin/Zera');
 }
 
-const balancesUpdate =async function(){
+const balancesUpdate = async function(){
     console.log("update");
     await api.put('Admin/Saldo');
 }

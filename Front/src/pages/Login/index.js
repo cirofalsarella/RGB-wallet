@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Auth from '../../services/AuthService.js'
 
 import RGB_sol from '../../assets/RGB_sol.png'
 import ICMC_logo from '../../assets/ICMC_logo.png'
@@ -11,17 +12,16 @@ export default function Login() {
     const [user_name, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
+    const loginAdmin = () => {
+        Auth.loginAdmin(user_name, password);
+    }
 
     function loginUser(){
         console.log(user_name);
     }
 
-    function loginAdmin(){
-        console.log(password);
-    }
-
     return (
-        <div>
+        <div>a
             <div className="main-content">
 
                 <div className="">Carteira RGB</div>
