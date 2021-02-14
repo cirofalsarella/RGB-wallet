@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { BrowerRowter, useLocation, Link } from 'react-router-dom';
 import api from '../../services/api';
 
 import Menu from '../../Componentes/Menu.js';
@@ -12,11 +12,12 @@ import './styles.css';
 
 export default function User() {
 
+    const user_name = new URLSearchParams(useLocation().search).get("id")
     const [user, setUser] = useState ([]);
-
+    
     const fetchData = async () => {
         try {
-            const response = await api.get('/Users/' + "jun");
+            const response = await api.get('/Users/' + user_name);
             setUser(response.data);
         } catch (e) {
             alert(e);            
@@ -27,7 +28,6 @@ export default function User() {
         fetchData();
     }, []);
 
-    
     return (
         <>
             <div className="main-container">
@@ -48,7 +48,7 @@ export default function User() {
                         </row>
                         <row>
                             <div className="label">Saldo</div>
-                            <div className="item">R$ { user.sum } </div>
+                            <div className="item">R$ { (user.sum + 0.0001).toFixed(2) } </div>
                         </row>
                     </div>
 

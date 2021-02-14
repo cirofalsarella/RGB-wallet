@@ -27,7 +27,7 @@ const userDelete = async function (user_name){
 function Tabela(props){
 
     const MenuList = ([]);
-    if (props.rota == "Admin"){
+    if (props.rota === "Admin"){
         MenuList.push (
             {
                 acao: nada,
@@ -45,11 +45,11 @@ function Tabela(props){
                 texto: "Zerar Saldos"
             },
         );
-    } else if (props.rota == "User_Admin" ){
+    } else if (props.rota === "User_Admin" ){
         MenuList.push (
             {
                 acao: {},
-                rota: "../User_Create",
+                rota: `../User_Create/?id=${props.id}`,
                 texto: "Editar Usuário"
             },
             {
@@ -82,7 +82,7 @@ function Tabela(props){
 }
 
 
-export default function Menu(props){
+export default function Menu(props){    
     return (
         <div className="Menu-Container" >
 
@@ -91,7 +91,7 @@ export default function Menu(props){
                 <div className="Linha"></div>
             </div>
 
-            <Tabela rota={props.rota}/>
+            <Tabela rota={props.rota} id={props.id}/>
 
             <img src={logoImg} alt="Logo ICMC júnior" className="Img" />
         

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link }  from 'react-router-dom';
+import { Link, Redirect }  from 'react-router-dom';
+import { BrowerRowter, useLocation } from 'react-router-dom';
 import api from '../../services/api';
 
 import Menu from '../../Componentes/Menu.js';
@@ -10,8 +11,9 @@ import '../../global.css';
 
 export default function User_Create() {
 
-    const [user, setUser] = useState ({});
+    const id = new URLSearchParams(useLocation().search).get("id")
 
+    const [user, setUser] = useState ({});
     const [user_name, setUserName] = useState("");
     const [weeks_10h, setWeeks] = useState("");
     const [working, setWorking] = useState(Boolean);
@@ -21,7 +23,7 @@ export default function User_Create() {
 
 
     const fetchData = async () => {
-        const response = await api.get('/Users/' + 'jun');
+        const response = await api.get('/Users/' + id);
         setUser(response.data);
         setUserName(response.data.user_name);
         setWorking(response.data.working);
@@ -34,37 +36,39 @@ export default function User_Create() {
         fetchData();
     }, []);
 
-    let id;
     let novo = true;
     if (user){
         novo = false;
-        id = user.user_name;
     }
 
-    const handleCreate = (e) => {
+    function aux(){
+    }
+
+    const handleCreate = async (e) => {
         let User = {
             user_name: e.target.username.value,
             name: e.target.name.value,
             sold: e.target.sold.checked, 
             weeks_10h: e.target.weeks.value,
-            working: e.target.working.value
+            working: e.target.working.checked,
         }
-
-        /*
+        
         try {
             if (novo) {
-                await api.post("Users", User);
-                alert ('Usuario criado com sucesso');
+                await api.post("Users", User).then(
+                    alert("Usuário criado com sucesso")
+                )
             } else {
-                await api.put("Users/" + id, User);
-                alert ('Usuario editado com sucesso');
+                await api.put("Users/" + id, User).then(
+                    alert("Usuário editado com sucesso")
+                )
             }
-
         } catch(err) {
-            alert('Erro ao criar usuario');
+            alert("Ocorreu um erro, tente novamente")
         }
-        */
 
+        aux();
+        console.log("breakpoint")
     }
 
     return (
@@ -83,6 +87,9 @@ export default function User_Create() {
                 <div className="tabela-usuario">
                     <form onSubmit={handleCreate}>
 
+                        <input id="id" value={id} type="hidden" />
+                        <input id="novo" value={novo} type="hidden" />
+                        
                         <row>
                             <div className="table-name">UserName</div>
                             <input id="username" value={user_name} onChange={ e => setUserName(e.target.value) } />
@@ -93,7 +100,7 @@ export default function User_Create() {
                         </row>
                         <row>
                             <div className="table-name">Vendeu Projeto</div>
-                            <input id="sold" checked={sold} onChange={ e => setSold(e.target.value)} type="checkbox" />
+                            <input id="sold" checked={sold} onChange={ e => setSold(e.target.checked)} type="checkbox" />
                         </row>
                         <row>
                             <div className="table-name">Semanas com 10 horas</div>
@@ -101,7 +108,7 @@ export default function User_Create() {
                         </row>
                         <row>
                             <div className="table-name">Trabalhando em um Projeto</div>
-                            <input id="working" checked={working} onChange={ e => setWorking(e.target.value) } type="checkbox" />
+                            <input id="working" checked={working} onChange={ e => setWorking(e.target.checked) } type="checkbox" />
                         </row>
 
                         <div className="center-box">

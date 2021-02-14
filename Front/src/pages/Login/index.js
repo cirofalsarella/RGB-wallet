@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Auth from '../../services/AuthService.js'
 
 import RGB_sol from '../../assets/RGB_sol.png'
@@ -13,32 +13,25 @@ export default function Login() {
     const [password, setPassword] = useState('');
 
     const loginAdmin = () => {
-        Auth.loginAdmin(user_name, password);
-    }
-
-    function loginUser(){
-        console.log(user_name);
+        console.log("beta");
+        //Auth.loginAdmin(user_name, password);
     }
 
     return (
-        <div>a
+        <div>
             <div className="main-content">
 
                 <div className="">Carteira RGB</div>
-                
+
                 <ul className="login-form">
                     <li>
-                        <input 
-                            className="text-box"
-                            value={ user_name }
-                            onChange={ e => setUserName(e.target.value) } />
-                        <button onClick={ loginUser } >Login como Usuário</button>
+                        <input value={ user_name } onChange={ e => setUserName(e.target.value) } />
+                        <Link to={`../User/?id=${user_name}`}>
+                            <button>Login como Usuário</button>
+                        </Link>
                     </li>
                     <li>
-                        <input 
-                            className="text-box"
-                            value={ password }
-                            onChange={ e => setPassword(e.target.value) } />
+                        <input value={ password } onChange={ e => setPassword(e.target.value) } />
                         <button onClick={ loginAdmin } >Login como Admin</button>
                     </li>
                 </ul>

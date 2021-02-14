@@ -45,7 +45,7 @@ server.get("/Users/:user_name", async (req,res) => {
 
     return res.status(200).json(user_db); //retorna o usuario
   } catch (err) {
-    return null;
+    return res.status(404);
   }
   
 })
@@ -64,12 +64,12 @@ server.post("/Users", async (req,res) => {
       working,
       weeks_10h,
       sum,
-    })                                                   //insere no DB
+    })                                                                  //insere no DB
   
     return res.status(202).send(user);                                  //retorna o usuario adicionado
 
   }catch(error){
-      return res.send("UserName já existe");
+      return null;
   }
  
 })

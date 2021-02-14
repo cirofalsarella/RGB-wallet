@@ -43,7 +43,7 @@ function Tabela(){
                             <td>{user.working ? "Sim" : "Não"}</td>
                             <td>{user.weeks_10h}</td>
                             <td>
-                                <Link to="../User_Admin" id={user.user_name}>
+                                <Link to={ `../User_Admin/?id=${user.user_name}` }>
                                     <button/>
                                 </Link>
                             </td>
@@ -57,11 +57,9 @@ function Tabela(){
 }
 
 export default function Admin() {
-
     const logout = () => {
         Auth.logOut();
     }
-
 
     return (
         <div className="main-container">
