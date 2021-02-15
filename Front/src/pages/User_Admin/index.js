@@ -19,6 +19,7 @@ export default function User_Admin() {
         setUser(response.data);
 
     }
+    
     useEffect (() => {
         fetchData();
     }, []);

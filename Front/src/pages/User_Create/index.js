@@ -53,19 +53,30 @@ export default function User_Create() {
             working: e.target.working.checked,
         }
         
-        try {
-            if (novo) {
-                await api.post("Users", User).then(
-                    alert("Usuário criado com sucesso")
-                )
-            } else {
-                await api.put("Users/" + id, User).then(
-                    alert("Usuário editado com sucesso")
-                )
-            }
-        } catch(err) {
-            alert("Ocorreu um erro, tente novamente")
+        
+        if (novo) {
+            api.post("Users", User).then( (res) => {
+                alert("Usuário criado com sucesso");
+                console.log(res);
+            }).catch((err) => {
+                alert("Ocorreu um erro, tente novamente");
+                console.log(err);
+            })
+            
+        } else {
+            api.put("Users/" + id, User).then((res) => {
+                console.log(res);
+                alert("Usuário editado com sucesso");    
+            }).catch((err) =>{
+                alert("Ocorreu um erro, tente novamente");
+                console.log(err);
+            })
+            
+            
         }
+    
+        
+      
 
         aux();
         console.log("breakpoint")

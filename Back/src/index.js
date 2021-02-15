@@ -1,17 +1,18 @@
-import express from 'express';
+import express, { response } from 'express';
 import bodyParser from 'body-parser';
+import json from 'body-parser/lib/types/json';
 
 const cors = require('cors');
 const connection = require('./database/connection');
 
-const bcrypt = require ("bcryptjs");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const SECRET = "ICMCJR";
 
 const server = express();
 
 server.use(cors({}));
-server.use(bodyParser.urlencoded({extended: true}));
+server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json())
 
 /*
@@ -28,14 +29,14 @@ server.use(bodyParser.json())
 //************  C.R.U.D ************
 
 //Funcao que retorna todos os usuarios
-server.get("/Users", async (req,res) => {
+server.get("/Users", async (req, res) => {
   const users = await connection('users').select('*');
 
   return res.status(200).send(users);   //retorna toda a lista de usuario do DB
 })
 
 //Funcao que retorna um usuario
-server.get("/Users/:user_name", async (req,res) => {
+server.get("/Users/:user_name", async (req, res) => {
   try {
     console.log("Ops");
     const searched_user_name = req.params.user_name;       //pega o username para fazer a busca
@@ -47,51 +48,48 @@ server.get("/Users/:user_name", async (req,res) => {
   } catch (err) {
     return res.status(404);
   }
-  
+
 })
 
-//Funcao que adiciona um usuario
-server.post("/Users", async (req,res) => {
-  try{
-    const {user_name, name, sold, working, weeks_10h} = req.body;       //salva o username,nome,se vendeu este mes,se esta em um projeto,e quantas semanas trabalhou
-    const sum = 0;                                                      //saldo zerado
-    const user = {user_name, name, sold, working, weeks_10h, sum}       //cria o usuario com os dados coletados
-    
-    await connection('users').insert({
-      user_name,
-      name,
-      sold,
-      working,
-      weeks_10h,
-      sum,
-    })                                                                  //insere no DB
-  
-    return res.status(202).send(user);                                  //retorna o usuario adicionado
+//Funcao que adiciona um usuario  
+server.post("/Users", async (req, res) => {
+  const { user_name, name, sold, working, weeks_10h } = req.body;       //salva o username,nome,se vendeu este mes,se esta em um projeto,e quantas semanas trabalhou
+  const sum = 0;                                                      //saldo zerado
+  const user = { user_name, name, sold, working, weeks_10h, sum }       //cria o usuario com os dados coletados
 
-  }catch(error){
-      return null;
-  }
- 
-})
+  connection('users').insert({
+    user_name,
+    name,
+    sold,
+    working,
+    weeks_10h,
+    sum,
+  }).then((response) => {
+    return res.status(202).send(response);
+  }).catch((err) => {
+    return res.status(400).send(err);
+  })
+
+});
 
 //Funcao que atualiza um usuario
-server.put("/Users/:user_name", async (req,res) => {
+server.put("/Users/:user_name", async (req, res) => {
   const user_name2 = req.params.user_name;                                 //username a ser atualizado
-  
-  const {user_name, name, sold, working, weeks_10h, sum} = req.body;      //info do usuario atualizado
-  const user_db = {user_name, name, sold, working, weeks_10h, sum};
 
-  await connection('users').where('user_name', user_name2).update({user_name, name, sold, working, weeks_10h, sum}); //atualiza no DB
- 
+  const { user_name, name, sold, working, weeks_10h, sum } = req.body;      //info do usuario atualizado
+  const user_db = { user_name, name, sold, working, weeks_10h, sum };
+
+  await connection('users').where('user_name', user_name2).update({ user_name, name, sold, working, weeks_10h, sum }); //atualiza no DB
+
   return res.status(200).send(user_db);    //retorna o usuario atualizado
 
 })
 
 //Funcao que deleta um usuario
-server.delete("/Users/:user_name", async (req,res) => {
+server.delete("/Users/:user_name", async (req, res) => {
   const user_name = req.params.user_name;         //username do usuario a ser deletado
   const user_db = await connection('users').where('user_name', user_name).delete(); //deleta no DB
-  
+
   return res.status(204).send();     //retorna a lista atualizada
 })
 
@@ -101,13 +99,13 @@ server.delete("/Users/:user_name", async (req,res) => {
 //****************** Botões ******************
 
 //funcao que atualiza o saldo de todos
-server.put("/Admin/Saldo", async (req,res) => {
+server.put("/Admin/Saldo", async (req, res) => {
   let users = await connection('users').select('*');      //resgata a lista do DB
 
   //altera no DB o valor do saldo de cada usuario
-  users.forEach(async user => {       
-    user.sum += (40 +(5 * user.weeks_10h) * (1 + (user.sold && 0.2) + (user.working && 0.1)));    
-    await connection('users').where('user_name', user.user_name).update({                       
+  users.forEach(async user => {
+    user.sum += (40 + (5 * user.weeks_10h) * (1 + (user.sold && 0.2) + (user.working && 0.1)));
+    await connection('users').where('user_name', user.user_name).update({
       sum: user.sum
     })
   })
@@ -117,11 +115,11 @@ server.put("/Admin/Saldo", async (req,res) => {
 })
 
 //funcao de zerar o saldo de todos os usuarios
-server.put("/Admin/Zera", async (req,res) => {
+server.put("/Admin/Zera", async (req, res) => {
   await connection('users').select('*').update({            //passa pela lista do DB zerando o saldo
-    sum:0
+    sum: 0
   });
-  
+
   return res.status(204).send();    //retorna o usuario atualizado
 
 })
@@ -133,74 +131,73 @@ server.put("/Admin/Zera", async (req,res) => {
 //****************** Login *******************
 
 //funcao que adiciona um admin
-server.post("/login/add",(request, response, next) => {
+server.post("/login/add", (request, response, next) => {''
   bcrypt.hash(request.body.password, 10)
-  .then(hashedPassword => {
-     return connection('admin').insert({
+    .then(hashedPassword => {
+      return connection('admin').insert({
         username: request.body.username,
         password: hashedPassword
-     })
-     .then(users => {
-        response.json(users[0])
-     }) 
-     .catch(error => next(error))
-  })
+      })
+        .then(users => {
+          response.json(users[0])
+        })
+        .catch(error => next(error))
+    })
 })
 
 //funcao que retorna todos os admin
-server.get("/login/all",(request, response, next) => {
+server.get("/login/all", (request, response, next) => {
   connection('admin')
-  .then(users => {
-     response.json(users)
-  })
+    .then(users => {
+      response.json(users)
+    })
 })
 
 //funcao que faz o login
-server.post("/login", async(request, response, next) => {
+server.post("/login", async (request, response, next) => {
   await connection('admin')
-  .where({username: request.body.username})
-  .first()
-  .then(user => {
-     if(!user){
+    .where({ username: request.body.username })
+    .first()
+    .then(user => {
+      if (!user) {
         response.status(401).json({
-           error: "No user by that name"
+          error: "No user by that name"
         })
-     }else{
+      } else {
         return bcrypt
-        .compare(request.body.password, user.password)
-        .then(isAuthenticated => {
-           if(!isAuthenticated){
+          .compare(request.body.password, user.password)
+          .then(isAuthenticated => {
+            if (!isAuthenticated) {
               response.status(401).json({
-                 error: "Unauthorized Access!"
+                error: "Unauthorized Access!"
               })
-           }else{
+            } else {
               return jwt.sign(user, SECRET, (error, token) => {
-                 response.status(200).json({token})
+                response.status(200).json({ token })
               })
-           }
-        })
-     }
-  })
+            }
+          })
+      }
+    })
 })
 
 //verificacao do token
 server.get("/login/verify", (request, response, next) => {
   const token = request.headers.authorization.split(" ")[0]
-  //console.log(token);
   jwt.verify(token, SECRET, (error, decodedToken) => {
-     if(error){
-        response.status(401).json({
-           message: "Unauthorized Access!"
-        })
-     }else{
-        response.status(200).json({
-           id: decodedToken.id,
-           username: decodedToken.username
-        })
-     }
+    if (error) {
+      response.status(401).json({
+        username: "$$$$$$$$"
+      })
+    } else {
+      response.status(200).json({
+        id: decodedToken.id,
+        username: decodedToken.username
+      })
+    }
   })
 })
 
-server.listen(3001,function(){
+server.listen(3001, function () {
   console.log("rodando");
 });

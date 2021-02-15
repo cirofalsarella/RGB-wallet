@@ -19,6 +19,7 @@ function Tabela(){
             alert(e);            
         }
     }
+    
     useEffect (() => {
         fetchData();
     }, []);
@@ -57,20 +58,23 @@ function Tabela(){
 }
 
 export default function Admin() {
+    const [loggedOut, setLogOut] = useState(false);    
+
     const logout = () => {
         Auth.logOut();
+        setLogOut(true);
     }
 
     return (
         <div className="main-container">
-    
+            { loggedOut && <Redirect to="/"/>}
+
+
             <Menu rota="Admin" mssg="Bem Vinde de Volta!"/>
     
             <div className="main-content">
                 <div className="logout-box">
-                    <Link to="../">
-                        <button className="yellow-btn" onClick={ logout } >Logout</button>
-                    </Link>
+                    <button className="yellow-btn" onClick={ logout } >Logout</button>
                 </div>
 
                 <div className="page-name"> Seus Usuarios</div>

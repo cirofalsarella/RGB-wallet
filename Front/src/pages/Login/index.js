@@ -9,12 +9,19 @@ import './styles.css';
 
 export default function Login() {
 
+    const [admin, setAdmin] = useState (false);
     const [user_name, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
-    const loginAdmin = () => {
-        console.log("beta");
-        //Auth.loginAdmin(user_name, password);
+    const loginAdmin = async (e) => {
+        e.preventDefault();  
+        Auth.loginAdmin(e.target.user_name.value, e.target.password.value).then((res) => {
+            if (res){
+                setAdmin(res);
+            } else {
+                alert("Username ou Senha incorretos")
+            }
+        })
     }
 
     return (
@@ -24,16 +31,19 @@ export default function Login() {
                 <div className="">Carteira RGB</div>
 
                 <ul className="login-form">
-                    <li>
-                        <input value={ user_name } onChange={ e => setUserName(e.target.value) } />
-                        <Link to={`../User/?id=${user_name}`}>
-                            <button>Login como Usuário</button>
-                        </Link>
-                    </li>
-                    <li>
-                        <input value={ password } onChange={ e => setPassword(e.target.value) } />
-                        <button onClick={ loginAdmin } >Login como Admin</button>
-                    </li>
+                    <form onSubmit={loginAdmin}>
+                        <li>
+                            <input id="user_name" value={ user_name } onChange={ e => setUserName(e.target.value) } />
+                            <Link to={`../User/?id=${user_name}`}>
+                                <button>Login como Usuário</button>
+                            </Link>
+                        </li>
+                        <li>
+                            <input id="password" value={ password } onChange={ e => setPassword(e.target.value) } />
+                            <button type="submit" >Login como Admin</button>
+                        </li>
+                        {admin && <Redirect to="/Admin" />}
+                    </form>
                 </ul>
             
             </div>
