@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-/*   Coisas Gerais da Página   */
+/*   Tags   */
 body {
     background: #F6F1D6;
     margin: 0px;
@@ -8,33 +8,68 @@ body {
 button {
     cursor: pointer;
 }
-row {
+.row {
     margin: 20px;
     width: 80%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
+.text-box {
+    border-radius: 15px;
+    background-color: transparent;
+    width: 50%;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    color: black;
+}
+.check-box {
+    cursor: pointer;
+    width: 50%;
+}
 
 
-/*   De todas as páginas   */
+/*   Containers   */
 .main-container {
+    height: 100vh;
+    width: 100vw;
+    padding: 0px;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 .main-content {
-    width: 69%;
+    width: 70%;
     height: 100%;
     display: flex;
   	flex-direction: column;
     content: space-between;
-
 }
+.trow-right{
+    margin: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+.trow-center {
+    display: flex;
+    justify-content: center;
+    margin: 40px;
+}
+
+
+/*   TextTypes   */
 .page-name {
     font-family: "Roboto", sans-serif;
     font-size: 32px;
     color: #2854c7;
     margin: 30px;
+}
+.row-name {
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    color: #2854c7;
+    margin: 0px 10px;
 }
 .table-name {
     font-family: "Roboto", sans-serif;
@@ -44,12 +79,7 @@ row {
 }
 
 
-/*   Logout   */
-.logout-box {
-    margin: 30px;
-    display: flex;
-    justify-content: flex-end;
-}
+/*   Botões   */
 .yellow-btn {
     font-family: "Roboto", sans-serif;
     font-weight: 300;
@@ -64,18 +94,4 @@ row {
 .yellow-btn:hover  {
     font-size: 20px;
     background-color: rgba(250, 219, 44, 0.8)
-}
-
-.text-box {
-    background-color: transparent;
-    width: 40%;
-    font-family: "Roboto", sans-serif;
-    font-weight: 300;
-    font-size: 18px;
-    color: black;
-}
-.center-box {
-    display: flex;
-    justify-content: center;
-    margin: 40px;
 }

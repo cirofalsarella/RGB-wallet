@@ -1,0 +1,55 @@
+.cabecalho {
+    height: 40%;
+}
+.formulario {
+    margin: 50px;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.red {
+    color: red;
+    width: bold !important;
+}
+.green {
+    color: green;
+    width: bold !important;
+}
+.blue {
+    color: blue;
+    width: bold !important;
+}
+
+.data-type {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.data-place {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 60%;
+}
+
+.side-bar {
+    height: 100vh;
+    width: 40%;
+    background-color: #2854c7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.img-logo {
+    width: 170px;
+    margin-top: 50px;
+}
+.img-sol {
+    width: 280px;
+    margin-bottom: 40px;  
+}

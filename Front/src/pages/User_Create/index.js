@@ -71,12 +71,7 @@ export default function User_Create() {
                 alert("Ocorreu um erro, tente novamente");
                 console.log(err);
             })
-            
-            
         }
-    
-        
-      
 
         aux();
         console.log("breakpoint")
@@ -89,45 +84,43 @@ export default function User_Create() {
             
             <div className="main-content" >
 
-                <div className="logout-box">
+                <div className="trow-right">
                     <Link to="../Admin">
                         <button className="yellow-btn"><FiCornerDownLeft/></button>
                     </Link> 
                 </div>
 
-                <div className="tabela-usuario">
-                    <form onSubmit={handleCreate}>
+                <form onSubmit={handleCreate} className="tabela-usuario">
 
                         <input id="id" value={id} type="hidden" />
                         <input id="novo" value={novo} type="hidden" />
                         
-                        <row>
+                        <div className="row">
                             <div className="table-name">UserName</div>
-                            <input id="username" value={user_name} onChange={ e => setUserName(e.target.value) } />
-                        </row>
-                        <row>
+                            <input className="text-box" id="username" value={user_name} onChange={ e => setUserName(e.target.value) } />
+                        </div>
+                        <div className="row">
                             <div className="table-name">Nome</div>
-                            <input id="name" value={name} onChange={ e => setName(e.target.value) } />
-                        </row>
-                        <row>
+                            <input className="text-box" id="name" value={name} onChange={ e => setName(e.target.value) } />
+                        </div>
+                        <div className="row">
                             <div className="table-name">Vendeu Projeto</div>
-                            <input id="sold" checked={sold} onChange={ e => setSold(e.target.checked)} type="checkbox" />
-                        </row>
-                        <row>
+                            <input className="check-box" id="sold" checked={sold} onChange={ e => setSold(e.target.checked)} type="checkbox" />
+                        </div>
+                        <div className="row">
                             <div className="table-name">Semanas com 10 horas</div>
-                            <input id="weeks" value={weeks_10h} onChange={ e => setWeeks(e.target.value) } />
-                        </row>
-                        <row>
+                            <input className="text-box" id="weeks" value={weeks_10h} onChange={ e => setWeeks(e.target.value) } />
+                        </div>
+                        <div className="row">
                             <div className="table-name">Trabalhando em um Projeto</div>
-                            <input id="working" checked={working} onChange={ e => setWorking(e.target.checked) } type="checkbox" />
-                        </row>
+                            <input className="check-box" id="working" checked={working} onChange={ e => setWorking(e.target.checked) } type="checkbox" />
+                        </div>
 
-                        <div className="center-box">
+                        <div className="trow-center">
                             <button type="submit" className="submit-btn">Salvar Usuário</button>
                         </div>
 
                     </form>
-                </div>
                 
             </div>
 

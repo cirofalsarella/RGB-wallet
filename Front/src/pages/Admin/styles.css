@@ -16,3 +16,9 @@
     display: flex;
     justify-content: space-between;
 }
+.default-message {
+    margin: 10px 40px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 200;
+    font-size: 20px;
+}

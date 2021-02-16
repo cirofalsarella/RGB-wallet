@@ -25,35 +25,37 @@ function Tabela(){
     }, []);
 
     return (
-        <table className="tabela-usuarios">
-            <tr className="titulos">
-                <th>Nome</th>
-                <th>Saldo</th>
-                <th>Em Projeto</th>
-                <th>Semanas Cumpridas</th>
-                <th></th>
-            </tr>
-
-            {
-                userList.length > 0 &&
-                userList.map(user => {
-                    return (
-                        <tr>
-                            <td>{user.user_name}</td>
-                            <td>{user.sum}</td>
-                            <td>{user.working ? "Sim" : "Não"}</td>
-                            <td>{user.weeks_10h}</td>
-                            <td>
-                                <Link to={ `../User_Admin/?id=${user.user_name}` }>
-                                    <button/>
-                                </Link>
-                            </td>
-                        </tr>
-                    )
-                })
-
+        <>
+            { userList.length > 0 &&
+                <table className="tabela-usuarios">
+                    <tr className="titulos">
+                        <th>Nome</th>
+                        <th>Saldo</th>
+                        <th>Em Projeto</th>
+                        <th>Semanas Cumpridas</th>
+                    </tr>
+                        { userList.map(user => {
+                            return (
+                                <tr>
+                                    <Link to={ `../User_Admin/?id=${user.user_name}` }>
+                                        <td>{user.user_name}</td>
+                                        <td>{user.sum}</td>
+                                        <td>{user.working ? "Sim" : "Não"}</td>
+                                        <td>{user.weeks_10h}</td>
+                                    </Link>
+                                </tr>
+                            )}
+                        )}
+                </table>
             }
-        </table>
+
+            { userList.length == 0 &&
+                <div className="default-message">
+                    Ainda não existem usuários em seu time,<br/><p/>
+                    <b>Adicione eles!</b>
+                </div>
+            }
+        </>
     )
 }
 
@@ -73,7 +75,7 @@ export default function Admin() {
             <Menu rota="Admin" mssg="Bem Vinde de Volta!"/>
     
             <div className="main-content">
-                <div className="logout-box">
+                <div className="trow-right">
                     <button className="yellow-btn" onClick={ logout } >Logout</button>
                 </div>
 

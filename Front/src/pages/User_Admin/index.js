@@ -31,7 +31,7 @@ export default function User_Admin() {
 
             <div className="main-content">
                 
-                <div className="logout-box">
+                <div className="trow-right">
                     <Link to="../Admin">
                         <button className="yellow-btn"><FiCornerDownLeft/></button>
                     </Link>
@@ -40,26 +40,26 @@ export default function User_Admin() {
                 <div className="page-name">{user.user_name}</div>
 
                 <div className="tabela">
-                    <row>
+                    <div className="row">
                         <div className="label">Nome</div>
                         <div className="item">{user.name}</div>
-                    </row>
-                    <row>
+                    </div>
+                    <div className="row">
                         <div className="label">Saldo</div>
                         <div className="item">R$ { (user.sum + 0.0001).toFixed(2) }</div>
-                    </row>
-                    <row>
+                    </div>
+                    <div className="row">
                         <div className="label">Vendeu Projeto</div>
                         <div className="item">{user.sold ? "sim" : "não"}</div>
-                    </row>
-                    <row>
+                    </div>
+                    <div className="row">
                         <div className="label">Semanas com 10 horas</div>
                         <div className="item">{user.weeks_10h}</div>
-                    </row>
-                    <row>
+                    </div>
+                    <div className="row">
                         <div className="label">Trabalhado em projeto</div>
                         <div className="item">{user.working ? "sim" : "não"}</div>
-                    </row>
+                    </div>
                 </div>
             </div>
         </div>

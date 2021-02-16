@@ -35,21 +35,21 @@ export default function User() {
 
                 <div className="main-content">
 
-                    <div className="logout-box">
+                    <div className="trow-right">
                         <Link to="../Login">
                             <button className="yellow-btn">Logout</button>
                         </Link>
                     </div>
 
                     <div className="tabela">
-                        <row>
+                        <div className="row">
                             <div className="label">Nome</div>
                             <div className="item">{ user.user_name }</div> 
-                        </row>
-                        <row>
+                        </div>
+                        <div className="row">
                             <div className="label">Saldo</div>
                             <div className="item">R$ { (user.sum + 0.0001).toFixed(2) } </div>
-                        </row>
+                        </div>
                     </div>
 
                     <div className="img-box">

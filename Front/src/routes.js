@@ -32,9 +32,9 @@ export default function Routes() {
     return (
         <BrowserRouter>
             <Switch>
-                <PrivateRoute exact path="/Admin/" component={Admin} />
-                <PrivateRoute exact path="/User_Admin/"  component={User_Admin} />
-                <PrivateRoute exact path="/User_Create/" component={User_Create} />
+                <Route exact path="/Admin/" component={Admin} />
+                <Route exact path="/User_Admin/"  component={User_Admin} />
+                <Route exact path="/User_Create/" component={User_Create} />
                 <Route exact path="/User/" component={User} />
                 <Route path="/" component={Login} />
             </Switch>
