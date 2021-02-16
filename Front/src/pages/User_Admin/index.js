@@ -50,7 +50,7 @@ export default function User_Admin() {
                     </div>
                     <div className="row">
                         <div className="label">Vendeu Projeto</div>
-                        <div className="item">{user.sold ? "sim" : "não"}</div>
+                        <div className="item">{user.sold ? "Sim" : "Não"}</div>
                     </div>
                     <div className="row">
                         <div className="label">Semanas com 10 horas</div>
@@ -58,7 +58,7 @@ export default function User_Admin() {
                     </div>
                     <div className="row">
                         <div className="label">Trabalhado em projeto</div>
-                        <div className="item">{user.working ? "sim" : "não"}</div>
+                        <div className="item">{user.working ? "Sim" : "Não"}</div>
                     </div>
                 </div>
             </div>

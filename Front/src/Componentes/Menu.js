@@ -1,78 +1,77 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react'
+import { Link, Redirect } from 'react-router-dom';
 import api from '../services/api';
 
 import logoImg from '../assets/ICMC_logo.png'
 
 import './style.css'
 
-const nada = async function(){
+const userEdit = (setRedirect) => {
+    setRedirect(true);
 }
-
-const balancesReset = async function(){
-    console.log("reset");
+const userCreate = (setRedirect) => {
+    setRedirect(true);
+}
+const balancesReset = async function(setRedirect){
     await api.put('Admin/Zera');
+    setRedirect(true);
 }
-
-const balancesUpdate = async function(){
-    console.log("update");
+const balancesUpdate = async function(setRedirect){
     await api.put('Admin/Saldo');
+    setRedirect(true);
 }
-
-const userDelete = async function (user_name){
-    console.log("delete");
+async function userDelete(setRedirect, user_name){
     await api.delete('Users/'+ user_name);
+    setRedirect(true);
 }
-
 function Tabela(props){
+    
+    const [admin, setAdmin] = useState(false)
+    const [editar, setEditar] = useState(false)
+    const [criar, setCriar] = useState(false)
+    let editDest = `../User_Create/?id=${props.id}`
 
     const MenuList = ([]);
     if (props.rota === "Admin"){
         MenuList.push (
             {
-                acao: nada,
-                rota: "../User_Create",
+                acao: () => userCreate(setCriar),
                 texto: "Novo Usuário"
             },
             {
-                acao: balancesUpdate,
-                rota: "../Admin",
+                acao: () => balancesUpdate(setAdmin),
                 texto: "Adicionar Crédito"
             },
             {
-                acao: balancesReset,
-                rota: "../Admin",
+                acao: () => balancesReset(setAdmin),
                 texto: "Zerar Saldos"
             },
         );
     } else if (props.rota === "User_Admin" ){
         MenuList.push (
             {
-                acao: {},
-                rota: `../User_Create/?id=${props.id}`,
+                acao: () => userEdit(setEditar, props.id),
                 texto: "Editar Usuário"
             },
             {
-                acao: userDelete,
-                rota: "../User",
+                acao: () => userDelete(setAdmin, props.id),
                 texto: "Apagar Usuário"
             },
         );
-    } else {
-        MenuList.push (
-        );
-
     }
 
     return(
         <ul className="Lista-Menu">
+            { admin && <Redirect to="../Admin"/> }
+            { editar && <Redirect to={ editDest } /> }
+            { criar && <Redirect to="../User_Create/"/> }
+
             {
                 MenuList.map (item =>{
                     return (
                         <li>
-                            <Link to={item.rota}>
-                                <button className="Botao-Menu" onClick={item.acao}>{item.texto}</button>
-                            </Link>
+                            <button className="Botao-Menu" onClick={item.acao}>{item.texto}</button>
                         </li>
                     )
                 })

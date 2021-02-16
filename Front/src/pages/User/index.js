@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowerRowter, useLocation, Link } from 'react-router-dom';
+import { BrowerRowter, useLocation, Link, Redirect } from 'react-router-dom';
 import api from '../../services/api';
 
 import Menu from '../../Componentes/Menu.js';
@@ -11,7 +11,7 @@ import './styles.css';
 
 
 export default function User() {
-
+    const [redirect, setRedirect] = useState(false);
     const user_name = new URLSearchParams(useLocation().search).get("id")
     const [user, setUser] = useState ([]);
     
@@ -19,17 +19,24 @@ export default function User() {
         try {
             const response = await api.get('/Users/' + user_name);
             setUser(response.data);
+            if (user_name != response.data.user_name){
+                setRedirect(true);
+            }
         } catch (e) {
             alert(e);            
-        }
-    }
+            setRedirect(true);
+        }   
 
+
+
+    }
     useEffect (() => {
         fetchData();
     }, []);
 
     return (
         <>
+            { redirect && <Redirect to="../?notFound=1" /> }
             <div className="main-container">
                 <Menu rota="User" mssg="Bem Vinde de Volta" />
 
@@ -44,7 +51,7 @@ export default function User() {
                     <div className="tabela">
                         <div className="row">
                             <div className="label">Nome</div>
-                            <div className="item">{ user.user_name }</div> 
+                            <div className="item">{ user.name }</div> 
                         </div>
                         <div className="row">
                             <div className="label">Saldo</div>
@@ -57,7 +64,6 @@ export default function User() {
                     </div>
 
                 </div>
-
             </div>
         </>
     )

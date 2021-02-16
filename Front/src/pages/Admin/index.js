@@ -29,24 +29,28 @@ function Tabela(){
             { userList.length > 0 &&
                 <table className="tabela-usuarios">
                     <tr className="titulos">
-                        <th>Nome</th>
-                        <th>Saldo</th>
-                        <th>Em Projeto</th>
-                        <th>Semanas Cumpridas</th>
+                        <td></td>
+                        <td>Nome</td>
+                        <td>Saldo</td>
+                        <td>Em Projeto</td>
+                        <td>Semanas Cumpridas</td>
                     </tr>
-                        { userList.map(user => {
-                            return (
-                                <tr>
-                                    <td>{user.user_name}</td>
-                                    <td>{user.sum}</td>
-                                    <td>{user.working ? "Sim" : "Não"}</td>
-                                    <td>{user.weeks_10h}</td>
+                    { userList.map(user => {
+                        return (
+                            <tr>
+                                <td>
                                     <Link to={ `../User_Admin/?id=${user.user_name}` }>
-                                        <button>Visualizar</button>
+                                        <button className="visualize-btn">Visualizar</button>
                                     </Link>
-                                </tr>
-                            )}
+                                </td>
+                                <td>{user.user_name}</td>
+                                <td>{user.sum}</td>
+                                <td>{user.working ? "Sim" : "Não"}</td>
+                                <td>{user.weeks_10h}</td>
+
+                            </tr>
                         )}
+                    )}
                 </table>
             }
 

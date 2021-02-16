@@ -38,11 +38,10 @@ server.get("/Users", async (req, res) => {
 //Funcao que retorna um usuario
 server.get("/Users/:user_name", async (req, res) => {
   try {
-    console.log("Ops");
     const searched_user_name = req.params.user_name;       //pega o username para fazer a busca
     const user_db = await connection('users').where('user_name', searched_user_name).first();  //busca no DB
 
-    console.log(user_db);
+    //console.log(user_db);
 
     return res.status(200).json(user_db); //retorna o usuario
   } catch (err) {
@@ -65,8 +64,7 @@ try{
     weeks_10h,
     sum,
   })
-  
-    return res.status(200).send(user);
+  return res.status(200).send(user);
  
 }catch(err){
   return res.status(400).send(err);
@@ -81,11 +79,15 @@ server.put("/Users/:user_name", async (req, res) => {
 
   const { user_name, name, sold, working, weeks_10h, sum } = req.body;      //info do usuario atualizado
   const user_db = { user_name, name, sold, working, weeks_10h, sum };
+  try{
+    const response =  await connection('users').where('user_name', user_name2).update({ user_name, name, sold, working, weeks_10h, sum }); //atualiza no DB
 
-  await connection('users').where('user_name', user_name2).update({ user_name, name, sold, working, weeks_10h, sum }); //atualiza no DB
+    return res.status(200).send(user_db);    //retorna o usuario atualizado
 
-  return res.status(200).send(user_db);    //retorna o usuario atualizado
-
+  }catch(err){
+    return res.status(400).send(err);
+  }
+  
 })
 
 //Funcao que deleta um usuario

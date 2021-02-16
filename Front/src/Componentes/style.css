@@ -4,7 +4,7 @@
 /*   Menu   */
 .Menu-Container {
     width: 30%;
-    height: 100vh;
+    height: 100%;
     background: #2854C7;
     color: #ffffff;
     display: flex;

@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { useLocation, Link, Redirect } from 'react-router-dom';
 import Auth from '../../services/AuthService.js'
 
 import RGB_sol from '../../assets/RGB_sol.png'
 import ICMC_logo from '../../assets/ICMC_logo.png'
 
-import './styles.css';
 import '../../global.css';
+import './styles.css';
 
-export default function Login() {
+export default function Login(props) {
+    
+    let notFound = new URLSearchParams(useLocation().search).get("notFound");
+    
     const [usuario, setusuario] = useState(false);
     const [admin, setAdmin] = useState(false);
 
@@ -45,8 +48,10 @@ export default function Login() {
                             <span className="blue">B</span>
                         </div>
                     </div>
-                    
                     <form onSubmit={loginAdmin} className="formulario">
+                        <div className="text">
+                            {notFound && <span>Usuário não encontrado</span> }
+                        </div>
                         <div className="data-type">
                             <div className="data-place">
                                 <span className="row-name">Username</span>
@@ -59,12 +64,13 @@ export default function Login() {
                         <div className="data-type">
                             <div className="data-place">
                                 <span className="row-name">Senha</span>
-                                <input className="text-box" id="password" value={ password } onChange={ e => setPassword(e.target.value) } />
+                                <input className="text-box" id="password" value={ password } onChange={ e => setPassword(e.target.value) } type="password" />
                             </div>
 
                             <button type="submit" className="yellow-btn">Login como Admin</button>
                         </div>
                     </form>
+
                 
 
                 </div>

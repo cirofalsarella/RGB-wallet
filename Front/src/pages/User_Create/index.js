@@ -41,8 +41,8 @@ export default function User_Create() {
         novo = false;
     }
 
-    function aux(){
-    }
+    async function sendUser(User){ return await api.post("Users", User);}
+    async function updateUser(User){ return await api.put("Users/" + id, User);}
 
     const handleCreate = async (e) => {
         let User = {
@@ -52,29 +52,29 @@ export default function User_Create() {
             weeks_10h: e.target.weeks.value,
             working: e.target.working.checked,
         }
-        
-        
-        if (novo) {
-            api.post("Users", User).then( (res) => {
-                alert("Usuário criado com sucesso");
-                console.log(res);
-            }).catch((err) => {
-                alert("Ocorreu um erro, tente novamente");
-                console.log(err);
-            })
-            
-        } else {
-            api.put("Users/" + id, User).then((res) => {
-                console.log(res);
-                alert("Usuário editado com sucesso");    
-            }).catch((err) =>{
-                alert("Ocorreu um erro, tente novamente");
-                console.log(err);
-            })
-        }
 
-        aux();
-        console.log("breakpoint")
+        let msg = '';
+        if (novo) {
+            try{                
+                const response = sendUser(User);
+                console.log(response);
+                msg = "Usuário criado com sucesso"
+                alert(msg);
+                
+            }catch(err){
+                msg = "Ocorreu um erro, tente novamente";
+                alert(msg);
+            }
+        } else {
+            try{
+                const response = updateUser(User);
+                msg = "Usuário editado com sucesso";
+                alert(msg);
+            }catch(err){
+                msg = "Ocorreu um erro, tente novamente";
+                alert(msg);
+            }
+        }
     }
 
     return (
@@ -104,16 +104,22 @@ export default function User_Create() {
                             <input className="text-box" id="name" value={name} onChange={ e => setName(e.target.value) } />
                         </div>
                         <div className="row">
-                            <div className="table-name">Vendeu Projeto</div>
-                            <input className="check-box" id="sold" checked={sold} onChange={ e => setSold(e.target.checked)} type="checkbox" />
+                            <div className="table-name">Semanas com 10 horas</div>
+                            <input className="number-box" id="weeks" value={weeks_10h} onChange={ e => setWeeks(e.target.value) } type="number" />
                         </div>
                         <div className="row">
-                            <div className="table-name">Semanas com 10 horas</div>
-                            <input className="text-box" id="weeks" value={weeks_10h} onChange={ e => setWeeks(e.target.value) } />
+                            <div className="table-name">Vendeu Projeto</div>
+                            <label  className="check-box">
+                                <input type="checkbox" id="sold" checked={sold} onChange={ e => setSold(e.target.checked)} />
+                                <span className="slider"></span>
+                            </label>
                         </div>
                         <div className="row">
                             <div className="table-name">Trabalhando em um Projeto</div>
-                            <input className="check-box" id="working" checked={working} onChange={ e => setWorking(e.target.checked) } type="checkbox" />
+                            <label  className="check-box">
+                                <input type="checkbox" id="working" checked={working} onChange={ e => setWorking(e.target.checked) } />
+                                <span className="slider"></span>
+                            </label>
                         </div>
 
                         <div className="trow-center">
