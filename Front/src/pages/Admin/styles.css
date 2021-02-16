@@ -3,8 +3,8 @@
 .tabela-usuarios {
     width: 90%;
     margin: 40px;
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
 }
 
 .titulos {
@@ -13,8 +13,8 @@
     font-size: 18px;
     color: black;
     width: 70%;
-    display: flex;
-    justify-content: space-between;
+    /* display: flex;
+    justify-content: space-between; */
 }
 .default-message {
     margin: 10px 40px;

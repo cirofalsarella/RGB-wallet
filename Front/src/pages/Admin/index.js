@@ -37,11 +37,12 @@ function Tabela(){
                         { userList.map(user => {
                             return (
                                 <tr>
+                                    <td>{user.user_name}</td>
+                                    <td>{user.sum}</td>
+                                    <td>{user.working ? "Sim" : "Não"}</td>
+                                    <td>{user.weeks_10h}</td>
                                     <Link to={ `../User_Admin/?id=${user.user_name}` }>
-                                        <td>{user.user_name}</td>
-                                        <td>{user.sum}</td>
-                                        <td>{user.working ? "Sim" : "Não"}</td>
-                                        <td>{user.weeks_10h}</td>
+                                        <button>Visualizar</button>
                                     </Link>
                                 </tr>
                             )}
