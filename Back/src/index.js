@@ -56,19 +56,22 @@ server.post("/Users", async (req, res) => {
   const { user_name, name, sold, working, weeks_10h } = req.body;       //salva o username,nome,se vendeu este mes,se esta em um projeto,e quantas semanas trabalhou
   const sum = 0;                                                      //saldo zerado
   const user = { user_name, name, sold, working, weeks_10h, sum }       //cria o usuario com os dados coletados
-
-  connection('users').insert({
+try{
+  const response = await connection('users').insert({
     user_name,
     name,
     sold,
     working,
     weeks_10h,
     sum,
-  }).then((response) => {
-    return res.status(202).send(response);
-  }).catch((err) => {
-    return res.status(400).send(err);
   })
+  
+    return res.status(200).send(user);
+ 
+}catch(err){
+  return res.status(400).send(err);
+}
+  
 
 });
 
