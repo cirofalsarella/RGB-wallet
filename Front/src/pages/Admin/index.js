@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import Auth from '../../services/AuthService.js'
 
-import '../../global.css';
-import './styles.css';
-
 import api from '../../services/api'
 import Menu from '../../Componentes/Menu.js'
 
-function Tabela(){
-    const [userList, setUserList] = useState ([]);
+import '../../global.css';
+import './styles.css';
 
+function Tabela(){
+    // Lista com os usuários
+    const [userList, setUserList] = useState ([]);
     const fetchData = async () => {
         try {
             const response = await api.get('/Users');
@@ -19,7 +19,6 @@ function Tabela(){
             alert(e);            
         }
     }
-    
     useEffect (() => {
         fetchData();
     }, []);
@@ -65,8 +64,8 @@ function Tabela(){
 }
 
 export default function Admin() {
+    // Redirect para LogOut
     const [loggedOut, setLogOut] = useState(false);    
-
     const logout = () => {
         Auth.logOut();
         setLogOut(true);
@@ -76,15 +75,14 @@ export default function Admin() {
         <div className="main-container">
             { loggedOut && <Redirect to="/"/>}
 
-
             <Menu rota="Admin" mssg="Bem Vinde de Volta!"/>
     
             <div className="main-content">
-                <div className="trow-right">
+                <div className="row">
+                    <div className="page-name">Usuarios</div>
                     <button className="yellow-btn" onClick={ logout } >Logout</button>
                 </div>
 
-                <div className="page-name"> Seus Usuarios</div>
                 <Tabela />
             </div>
     

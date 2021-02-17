@@ -1,12 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
+/*   Containers   */
 .tabela {
     height: 60vh;
     margin: 30px;
     display: flex;
     flex-direction: column;
 }
+.img-box {
+    width: 80%;
+    display: flex;
+    justify-content: flex-end;
+}
 
+/*   Tipos de Texto   */
 .label {
     font-family: "Roboto", sans-serif;
     font-size: 24px;
@@ -19,12 +25,7 @@
     color: black;
 }
 
-.img-box {
-    width: 80%;
-    display: flex;
-    justify-content: flex-end;
-}
-
+/*   Srcs   */
 .img {
     width: 40vh;
 }

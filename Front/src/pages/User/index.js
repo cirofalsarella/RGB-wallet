@@ -12,8 +12,10 @@ import './styles.css';
 
 export default function User() {
     const [redirect, setRedirect] = useState(false);
+    // Redireciona para o login com erro (user not found)
+
     const user_name = new URLSearchParams(useLocation().search).get("id")
-    const [user, setUser] = useState ([]);
+    const [user, setUser] = useState ({});
     
     const fetchData = async () => {
         try {

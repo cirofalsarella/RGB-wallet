@@ -16,10 +16,12 @@ const userCreate = (setRedirect) => {
 const balancesReset = async function(setRedirect){
     await api.put('Admin/Zera');
     setRedirect(true);
+    window.location.reload();
 }
 const balancesUpdate = async function(setRedirect){
     await api.put('Admin/Saldo');
     setRedirect(true);
+    window.location.reload();
 }
 async function userDelete(setRedirect, user_name){
     await api.delete('Users/'+ user_name);

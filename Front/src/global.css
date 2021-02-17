@@ -9,10 +9,10 @@ button {
     cursor: pointer;
 }
 
-
 /*   Inputs   */
 .text-box {
-    border-radius: 15px;
+    border-radius: 20px;
+    padding: 5px;
     background-color: #F6F1D6;
     width: 50%;
     font-family: "Roboto", sans-serif;
@@ -24,7 +24,8 @@ button {
 }
 .number-box {
     width: 10%;
-    border-radius: 15px;
+    padding: 5px;
+    border-radius: 20px;
     background-color: #F6F1D6;
     font-family: "Roboto", sans-serif;
     font-weight: 300;
@@ -71,10 +72,8 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 input:checked + .slider {
-    background-color: #fff;
+    background-color: rgb(170, 209, 245);
 }
-
-
 
 /*   Containers   */
 .main-container {
@@ -92,17 +91,18 @@ input:checked + .slider {
     display: flex;
   	flex-direction: column;
     content: space-between;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .row {
     margin: 20px;
-    width: 80%;
+    width: 90%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 .trow-right{
-    height: 50px;
+    height: 30px;
     margin: 30px;
     display: flex;
     justify-content: flex-end;
@@ -112,7 +112,6 @@ input:checked + .slider {
     justify-content: center;
     margin: 40px;
 }
-
 
 /*   TextTypes   */
 .page-name {
@@ -138,7 +137,6 @@ input:checked + .slider {
     font-weight: 200    ;
     font-size: 20px;
 }
-
 
 /*   Botões   */
 .yellow-btn {

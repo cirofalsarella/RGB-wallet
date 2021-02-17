@@ -11,17 +11,20 @@ import '../../global.css';
 
 export default function User_Create() {
 
+    // id = username
     const id = new URLSearchParams(useLocation().search).get("id")
 
+    // User e suas propriedades
     const [user, setUser] = useState ({});
     const [user_name, setUserName] = useState("");
     const [weeks_10h, setWeeks] = useState("");
     const [working, setWorking] = useState(Boolean);
     const [name, setName] = useState("");
     const [sold, setSold] = useState(Boolean);
-    const [sum, setSum] = useState("");
+    // const [sum, setSum] = useState("");
 
 
+    // Pega o usuário a partir do id
     const fetchData = async () => {
         const response = await api.get('/Users/' + id);
         setUser(response.data);
@@ -30,12 +33,13 @@ export default function User_Create() {
         setWeeks(response.data.weeks_10h);
         setName(response.data.name);
         setSold(response.data.sold);
-        setSum(response.data.sum);
+        //setSum(response.data.sum);
     }
     useEffect (() => {
         fetchData();
     }, []);
 
+    // Marca se é criação ou edição
     let novo = true;
     if (user){
         novo = false;
@@ -44,6 +48,8 @@ export default function User_Create() {
     async function sendUser(User){ return await api.post("Users", User);}
     async function updateUser(User){ return await api.put("Users/" + id, User);}
 
+    
+    // Função de confirmação do formulário
     const handleCreate = async (e) => {
         let User = {
             user_name: e.target.username.value,

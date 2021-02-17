@@ -1,8 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
+/*   Tags   */
 table {
     border-collapse: collapse;
 }
+
+/*   Containers   */
 tr, td{
     height: 20px;
     vertical-align: bottom;
@@ -10,14 +13,16 @@ tr, td{
     border-width: 4px;
     padding: 10px;
 }
-tr:hover {background-color: #e0e0e0}
-
+tr:hover {
+    background-color: #e0e0e0
+}
 .tabela-usuarios {
     width: 90%;
     margin: 40px;
     text-align: center;
 }
 
+/*   Textos   */
 .titulos {
     background-color: transparent !important;
     font-family: "Roboto", sans-serif;
@@ -32,6 +37,7 @@ tr:hover {background-color: #e0e0e0}
     font-size: 20px;
 }
 
+/*   Inputs   */
 .visualize-btn{
     height: min-content;
     font-family: "Roboto", sans-serif;

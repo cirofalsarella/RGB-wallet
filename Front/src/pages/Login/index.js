@@ -9,34 +9,35 @@ import '../../global.css';
 import './styles.css';
 
 export default function Login(props) {
-    
+    // Flags para caso o login esteja errado
     let notFound = new URLSearchParams(useLocation().search).get("notFound");
-    
+    const [notAdmin, setNotAdmin] = useState(false);
+
+    // Flags para redirecionamento de página
     const [usuario, setusuario] = useState(false);
     const [admin, setAdmin] = useState(false);
 
+    // Inputs da página
     const [user_name, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
-    const loginUser = () => {
-        setusuario(true);
-    }
 
     const loginAdmin = async (e) => {
         e.preventDefault();  
+
         Auth.loginAdmin(e.target.user_name.value, e.target.password.value).then((res) => {
             if (res){
                 setAdmin(res);
             } else {
-                alert("Username ou Senha incorretos")
+                setNotAdmin(true);
             }
         })
     }
 
     return (
         <>
-            {usuario && <Redirect to={`../User/?id=${user_name}`} />}
-            {admin && <Redirect to="/Admin" />}
+            { usuario && <Redirect to={`../User/?id=${user_name}`} /> }
+            { admin && <Redirect to="/Admin" /> }
 
             <div className="main-container">
                 <div className="main-content">
@@ -49,16 +50,18 @@ export default function Login(props) {
                         </div>
                     </div>
                     <form onSubmit={loginAdmin} className="formulario">
-                        <div className="text">
-                            {notFound && <span>Usuário não encontrado</span> }
-                        </div>
+                        <p><div className="text">
+                            {notFound && <span>Usuário não encontrado</span> ||
+                             notAdmin && <span>Username ou Senha incorretos</span>}
+                        </div></p>
+
                         <div className="data-type">
                             <div className="data-place">
                                 <span className="row-name">Username</span>
                                 <input className="text-box" id="user_name" value={ user_name } onChange={ e => setUserName(e.target.value) } />
                             </div>
 
-                            <button onClick={loginUser} className="yellow-btn">Login como Usuário</button>
+                            <button onClick={() => setusuario(true)} className="yellow-btn">Login como Usuário</button>
                         </div>
 
                         <div className="data-type">

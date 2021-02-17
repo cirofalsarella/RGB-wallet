@@ -40,3 +40,6 @@ Back/npm-debug.log*
 Back/yarn-debug.log*
 Back/yarn-error.log*
 Back/.eslintcache
+
+Back/packaje.json
+Back/packaje-lock.json

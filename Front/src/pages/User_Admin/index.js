@@ -9,17 +9,13 @@ import './styles.css';
 
 
 export default function User_Admin() {
-    
+    // id = username
     const id = new URLSearchParams(useLocation().search).get("id")
-    
     const [user, setUser] = useState ({});
-
     const fetchData = async () => {
         const response = await api.get('/Users/' + id);
         setUser(response.data);
-
     }
-    
     useEffect (() => {
         fetchData();
     }, []);
