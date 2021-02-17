@@ -23,12 +23,14 @@ function Tabela(){
         fetchData();
     }, []);
 
+    const [redirect, setRedirect] = useState('');
+
     return (
         <>
+            { redirect && <Redirect to={ `../User_Admin/?id=${redirect}`}/> }
             { userList.length > 0 &&
                 <table className="tabela-usuarios">
                     <tr className="titulos">
-                        <td></td>
                         <td>Nome</td>
                         <td>Saldo</td>
                         <td>Em Projeto</td>
@@ -36,17 +38,11 @@ function Tabela(){
                     </tr>
                     { userList.map(user => {
                         return (
-                            <tr>
-                                <td>
-                                    <Link to={ `../User_Admin/?id=${user.user_name}` }>
-                                        <button className="visualize-btn">Visualizar</button>
-                                    </Link>
-                                </td>
+                            <tr onClick={() => setRedirect(user.user_name)} >
                                 <td>{user.user_name}</td>
                                 <td>{user.sum}</td>
                                 <td>{user.working ? "Sim" : "Não"}</td>
                                 <td>{user.weeks_10h}</td>
-
                             </tr>
                         )}
                     )}

@@ -14,6 +14,7 @@ tr, td{
     padding: 10px;
 }
 tr:hover {
+    cursor: pointer;
     background-color: #e0e0e0
 }
 .tabela-usuarios {
@@ -25,6 +26,7 @@ tr:hover {
 /*   Textos   */
 .titulos {
     background-color: transparent !important;
+    cursor: default !important;
     font-family: "Roboto", sans-serif;
     font-weight: bold !important;
     font-size: 18px;
