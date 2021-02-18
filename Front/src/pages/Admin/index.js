@@ -75,7 +75,7 @@ export default function Admin() {
     
             <div className="main-content">
                 <div className="row">
-                    <div className="page-name">Usuarios</div>
+                    <div className="page-name">Usuários</div>
                     <button className="yellow-btn" onClick={ logout } >Logout</button>
                 </div>
 
