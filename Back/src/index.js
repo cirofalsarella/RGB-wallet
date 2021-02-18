@@ -15,6 +15,7 @@ server.use(cors({}));
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json())
 
+
 /*
   GET:    '/Users' -> retorna todos os usuários
   GET:    '/Users/:user_name' -> retorna o usuario com esse user_name
@@ -41,7 +42,7 @@ server.get("/Users/:user_name", async (req, res) => {
     const searched_user_name = req.params.user_name;       //pega o username para fazer a busca
     const user_db = await connection('users').where('user_name', searched_user_name).first();  //busca no DB
 
-    //console.log(user_db);
+    console.log(user_db);
 
     return res.status(200).json(user_db); //retorna o usuario
   } catch (err) {
