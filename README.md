@@ -1,4 +1,4 @@
-![Imagem to Login](https://github.com/cirofalsarella/RGB-wallet/blob/main/Imagens/.png)
+![Imagem to Login](https://github.com/cirofalsarella/RGB-wallet/blob/main/Imagens/Login.png)
 
 ## 👯 Equipe
 
@@ -6,7 +6,7 @@
 - Bruno Gato Ba Garai
 - Jun (Big Boss)
 
-![Imagem to time](https://github.com/cirofalsarella/RGB-wallet/blob/main/Imagens/login.png)
+![Imagem to time](https://github.com/cirofalsarella/RGB-wallet/blob/main/Imagens/foto%20time.png)
 
 ## 📚 Aprendizado
 
